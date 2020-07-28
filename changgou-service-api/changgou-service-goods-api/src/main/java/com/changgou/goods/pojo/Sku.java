@@ -6,11 +6,9 @@ import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Date;
 
-/****
- * @Author:传智播客
- * @Description:Sku构建
- * @Date 2019/6/14 19:13
- *****/
+/**
+ *
+ */
 @Table(name="tb_sku")
 public class Sku implements Serializable{
 

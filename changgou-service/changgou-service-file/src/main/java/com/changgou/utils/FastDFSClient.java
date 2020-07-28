@@ -9,9 +9,6 @@ import org.springframework.core.io.ClassPathResource;
 import java.io.IOException;
 
 /**
- * @Author: Ye Jian Song
- * @Description:
- * @Date: Create in 16:15 2019/8/12
  * 封装FastDFS的api工具类
  */
 public class FastDFSClient {

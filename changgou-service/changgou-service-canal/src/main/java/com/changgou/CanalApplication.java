@@ -10,9 +10,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import tk.mybatis.spring.annotation.MapperScan;
 
 /**
- * @Author: Ye Jian Song
- * @Description:
- * @Date: Create in 11:40 2019/8/17
+ *
  */
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 @EnableEurekaClient

@@ -7,9 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * @Author: Ye Jian Song
- * @Description:
- * @Date: Create in 22:03 2019/8/21
+ *
  */
 @Component
 public class TopicMessageSender {

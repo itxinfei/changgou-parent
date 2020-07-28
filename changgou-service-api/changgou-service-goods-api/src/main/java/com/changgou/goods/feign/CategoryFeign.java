@@ -8,9 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * @Author: Ye Jian Song
- * @Description:
- * @Date: Create in 20:58 2019/8/20
+ *
  */
 @FeignClient(name = "goods")
 @RequestMapping("/category")

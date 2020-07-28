@@ -3,11 +3,9 @@ package com.changgou.goods.pojo;
 import javax.persistence.*;
 import java.io.Serializable;
 
-/****
- * @Author:传智播客
- * @Description:Brand构建
- * @Date 2019/6/14 19:13
- *****/
+/**
+ *
+ */
 @Table(name="tb_brand")
 public class Brand implements Serializable{
 

@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
- * @Author: Ye Jian Song
- * @Description:
- * @Date: Create in 16:45 2019/8/12
+ *
  */
 @RestController
 public class FileController {

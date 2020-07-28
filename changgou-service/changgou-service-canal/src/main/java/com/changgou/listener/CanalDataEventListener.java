@@ -97,25 +97,27 @@ public class CanalDataEventListener {
 
     /**
      * 监听添加之后的数据
+     *
      * @param entryType
      * @param rowData
      */
- /*   @InsertListenPoint
-    public void onEventInsert(CanalEntry.EntryType entryType, CanalEntry.RowData rowData){
+    @InsertListenPoint
+    public void onEventInsert(CanalEntry.EntryType entryType, CanalEntry.RowData rowData) {
         List<CanalEntry.Column> list = rowData.getAfterColumnsList();
         for (CanalEntry.Column column : list) {
             System.out.println("列名：" + column.getName() + "<--->列值：" + column.getValue());
         }
-    }*/
+    }
 
 
     /**
      * 监听更新前后的数据
+     *
      * @param entryType
      * @param rowData
      */
-  /*  @UpdateListenPoint
-    public void onEventUpdate(CanalEntry.EntryType entryType, CanalEntry.RowData rowData){
+    @UpdateListenPoint
+    public void onEventUpdate(CanalEntry.EntryType entryType, CanalEntry.RowData rowData) {
         //更新之前的数据
         List<CanalEntry.Column> beforeList = rowData.getBeforeColumnsList();
         for (CanalEntry.Column column : beforeList) {
@@ -127,19 +129,20 @@ public class CanalDataEventListener {
         for (CanalEntry.Column column : afterList) {
             System.out.println("列名：" + column.getName() + "<--->列值：" + column.getValue());
         }
-    }*/
+    }
 
     /**
      * 监听删除之前的数据
+     *
      * @param entryType
      * @param rowData
      */
- /*   @DeleteListenPoint
-    public void onEventDelete(CanalEntry.EntryType entryType, CanalEntry.RowData rowData){
+    @DeleteListenPoint
+    public void onEventDelete(CanalEntry.EntryType entryType, CanalEntry.RowData rowData) {
         List<CanalEntry.Column> beforeList = rowData.getBeforeColumnsList();
         for (CanalEntry.Column column : beforeList) {
             System.out.println("列名：" + column.getName() + "<--->列值：" + column.getValue());
         }
-    }*/
+    }
 
 }

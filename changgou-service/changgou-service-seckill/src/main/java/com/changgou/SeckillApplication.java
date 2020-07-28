@@ -17,9 +17,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import tk.mybatis.spring.annotation.MapperScan;
 
 /**
- * @Author: Ye Jian Song
- * @Description:
- * @Date: Create in 20:44 2019/8/28
+ * 秒杀服务
  */
 @SpringBootApplication
 @EnableEurekaClient
@@ -29,16 +27,16 @@ import tk.mybatis.spring.annotation.MapperScan;
 @EnableFeignClients(basePackages = "com.changgou.pay.feign")
 public class SeckillApplication {
     public static void main(String[] args) {
-        SpringApplication.run(SeckillApplication.class,args);
+        SpringApplication.run(SeckillApplication.class, args);
     }
 
     @Bean
-    public IdWorker idWorker(){
-        return new IdWorker(1,1);
+    public IdWorker idWorker() {
+        return new IdWorker(1, 1);
     }
 
     @Bean
-    public TokenDecode tokenDecode(){
+    public TokenDecode tokenDecode() {
         return new TokenDecode();
     }
 
@@ -46,10 +44,9 @@ public class SeckillApplication {
     public Environment env;
 
     @Bean
-    public RequestInterceptor feignInterceptor(){
+    public RequestInterceptor feignInterceptor() {
         return new FeignInterceptor();
     }
-
 
 
     // -------------------------------------取消支付--------------------------------------
@@ -60,8 +57,8 @@ public class SeckillApplication {
     }*/
 
     @Bean(name = "seckillOrderTimerQueue")
-    public Queue seckillOrderTimerQueue(){
-        return new Queue(env.getProperty("mq.pay.queue.seckillordertimer"),true);
+    public Queue seckillOrderTimerQueue() {
+        return new Queue(env.getProperty("mq.pay.queue.seckillordertimer"), true);
     }
 
     /*// 创建延时队列
@@ -74,28 +71,27 @@ public class SeckillApplication {
 
     // 创建延时队列
     @Bean(name = "delaySeckillOrderTimerQueue")
-    public Queue delaySeckillOrderTimerQueue(){
+    public Queue delaySeckillOrderTimerQueue() {
         return QueueBuilder.durable(env.getProperty("mq.pay.queue.seckillordertimerdelay"))
-                .withArgument("x-dead-letter-exchange",env.getProperty("mq.pay.exchange.order"))
-                .withArgument("x-dead-letter-routing-key",env.getProperty("mq.pay.queue.seckillordertimer")).build();
+                .withArgument("x-dead-letter-exchange", env.getProperty("mq.pay.exchange.order"))
+                .withArgument("x-dead-letter-routing-key", env.getProperty("mq.pay.queue.seckillordertimer")).build();
     }
 
 
     // 创建交换机
     @Bean(name = "delayExchange")
-    public Exchange delayExchange(){
+    public Exchange delayExchange() {
         //return new DirectExchange("exchange.seckillorder",true, false);
-        return new DirectExchange(env.getProperty("mq.pay.exchange.order"),true, false);
+        return new DirectExchange(env.getProperty("mq.pay.exchange.order"), true, false);
     }
 
     // 绑定交换机和队列
     @Bean(name = "basicBinding")
-    public Binding basicBinding(Queue seckillOrderTimerQueue ,Exchange delayExchange){
+    public Binding basicBinding(Queue seckillOrderTimerQueue, Exchange delayExchange) {
         return BindingBuilder.bind(seckillOrderTimerQueue)
                 .to(delayExchange)
                 .with(env.getProperty("mq.pay.queue.seckillordertimer")).noargs();
     }
-
 
 
 }

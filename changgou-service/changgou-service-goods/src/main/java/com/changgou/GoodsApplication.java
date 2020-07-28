@@ -8,9 +8,7 @@ import org.springframework.context.annotation.Bean;
 import tk.mybatis.spring.annotation.MapperScan;
 
 /**
- * @Author: Ye Jian Song
- * @Description:
- * @Date: Create in 20:30 2019/8/10
+ *
  */
 @SpringBootApplication
 @EnableEurekaClient

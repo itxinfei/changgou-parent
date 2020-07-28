@@ -3,11 +3,8 @@ package com.changgou.file;
 import java.io.Serializable;
 
 /**
- * @ClassName FastDFSFile
- * @Description 封装附件信息
- * @Date 10:57 2019/8/12
- * @Version 2.1
- **/
+ * 封装附件信息
+ */
 public class FastDFSFile implements Serializable {
 
     private String name;    // 文件名称

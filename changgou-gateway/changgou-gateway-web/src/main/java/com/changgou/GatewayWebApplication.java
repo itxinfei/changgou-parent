@@ -9,15 +9,13 @@ import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
 /**
- * @Author: Ye Jian Song
- * @Description:
- * @Date: Create in 16:52 2019/8/22
+ *  网关
  */
 @SpringBootApplication
 @EnableEurekaClient
 public class GatewayWebApplication {
     public static void main(String[] args) {
-        SpringApplication.run(GatewayWebApplication.class,args);
+        SpringApplication.run(GatewayWebApplication.class, args);
     }
 
     /***
@@ -25,13 +23,13 @@ public class GatewayWebApplication {
      * @return
      */
     @Bean(name = "ipKeyResolver")
-    public KeyResolver keyResolver(){
+    public KeyResolver keyResolver() {
         return new KeyResolver() {
             @Override
             public Mono<String> resolve(ServerWebExchange exchange) {
                 // 获取远程客户端IP
                 String hostAddress = exchange.getRequest().getRemoteAddress().getAddress().getHostAddress();
-                System.out.println("hostAddress:"+hostAddress);
+                System.out.println("hostAddress:" + hostAddress);
                 return Mono.just(hostAddress);
             }
         };

@@ -1,5 +1,6 @@
 package com.changgou.test.java;
 
+import entity.IdWorker;
 import io.jsonwebtoken.*;
 import org.junit.Test;
 
@@ -119,5 +120,13 @@ public class JwtTest {
         parser.setSigningKey("changgou");
         Claims claims = parser.parseClaimsJws(token).getBody();
         System.out.println(claims);
+    }
+    @Test
+    public void createID(){
+        IdWorker idWorker=new IdWorker(1,1);
+        for(int i=0;i<10000;i++){
+            long id = idWorker.nextId();
+            System.out.println(id);
+        }
     }
 }

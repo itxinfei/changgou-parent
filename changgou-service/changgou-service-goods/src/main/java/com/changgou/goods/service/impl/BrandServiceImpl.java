@@ -12,11 +12,9 @@ import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 
-/****
- * @Author:传智播客
- * @Description:Brand业务层接口实现类
- * @Date 2019/6/14 0:16
- *****/
+/**
+ *
+ */
 @Service
 public class BrandServiceImpl implements BrandService {
 

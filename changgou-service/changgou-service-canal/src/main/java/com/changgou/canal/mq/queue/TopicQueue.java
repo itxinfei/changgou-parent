@@ -5,9 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * @Author: Ye Jian Song
- * @Description:
- * @Date: Create in 22:02 2019/8/21
+ *
  */
 @Configuration
 public class TopicQueue {

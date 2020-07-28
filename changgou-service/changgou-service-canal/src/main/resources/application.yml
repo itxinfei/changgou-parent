@@ -4,10 +4,10 @@ spring:
   application:
     name: canal
   redis:
-    host: 192.168.211.132
+    host: 192.168.8.6
     port: 6379
   rabbitmq:
-    host: 192.168.211.132
+    host: 192.168.8.6
     port: 5672
     username: guest
     password: guest
@@ -32,5 +32,5 @@ canal:
   client:
     instances:
       example:
-        host: 192.168.211.132
+        host: 192.168.8.6
         port: 11111

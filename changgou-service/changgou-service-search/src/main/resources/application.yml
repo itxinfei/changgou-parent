@@ -6,7 +6,7 @@ spring:
   data:
     elasticsearch:
       cluster-name: my-application
-      cluster-nodes: 192.168.211.132:9300
+      cluster-nodes: 172.168.20.220:9300
   main:
     allow-bean-definition-overriding: true
 eureka:
