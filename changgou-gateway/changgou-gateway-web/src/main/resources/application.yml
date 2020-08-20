@@ -6,55 +6,59 @@ spring:
           '[/**]': # 匹配所有请求
             allowedOrigins: "*" #跨域处理 允许所有的域
             allowedMethods: # 支持的方法
-            - GET
-            - POST
-            - PUT
-            - DELETE
+              - GET
+              - POST
+              - PUT
+              - DELETE
       routes:
-#        对接商品服务
-      - id: changgou_goods_route
-        uri: lb://goods
-        predicates:
-        - Path=/api/album/**,/api/brand/**,/api/cache/**,/api/categoryBrand/**,/api/category/**,/api/para/**,/api/pref/**,/api/sku/**,/api/spec/**,/api/spu/**,/api/stockBack/**,/api/template/**
-        filters:
-        - StripPrefix=1
-        - name: RequestRateLimiter #请求数限流 名字不能随便写 ，使用默认的facatory
-          args:
-            key-resolver: "#{@ipKeyResolver}"
-            redis-rate-limiter.replenishRate: 1
-            redis-rate-limiter.burstCapacity: 1
-#          对接user服务
-      - id: changgou_user_route
-        uri: lb://user
-        predicates:
-        - Path=/api/user/**,/api/address/**,/api/areas/**,/api/cities/**,/api/provinces/**
-        filters:
-        - StripPrefix=1
+        # 对接商品服务
+        - id: changgou_goods_route
+          uri: lb://goods
+          predicates:
+            - Path=/api/album/**,/api/brand/**,/api/cache/**,/api/categoryBrand/**,/api/category/**,/api/para/**,/api/pref/**,/api/sku/**,/api/spec/**,/api/spu/**,/api/stockBack/**,/api/template/**
+          filters:
+            - StripPrefix=1
+            - name: RequestRateLimiter #请求数限流 名字不能随便写 ，使用默认的facatory
+              args:
+                # 用于限流的键的解析器的 Bean 对象的名字。它使用 SpEL 表达式根据#{@beanName}从 Spring 容器中获取 Bean 对象。
+                key-resolver: "#{@ipKeyResolver}"
+                # 令牌桶每秒填充平均速率
+                redis-rate-limiter.replenishRate: 1
+                # 令牌桶总容量
+                redis-rate-limiter.burstCapacity: 1
+                # 上面配置，表示一秒内，允许 一个请求通过，令牌桶的填充速率也是一秒钟添加一个令牌。
+        # 对接user服务
+        - id: changgou_user_route
+          uri: lb://user
+          predicates:
+            - Path=/api/user/**,/api/address/**,/api/areas/**,/api/cities/**,/api/provinces/**
+          filters:
+            - StripPrefix=1
 
-#        对接订单服务
-      - id: changgou_order_route
-        uri: lb://order
-        predicates:
-        - Path=/api/cart/**,/api/categoryReport/**,/api/orderConfig/**,/api/order/**,/api/orderItem/**,/api/orderLog/**,/api/preferential/**,/api/returnCause/**,/api/returnOrder/**,/api/returnOrderItem/**
-        filters:
-        - StripPrefix=1
+        # 对接订单服务
+        - id: changgou_order_route
+          uri: lb://order
+          predicates:
+            - Path=/api/cart/**,/api/categoryReport/**,/api/orderConfig/**,/api/order/**,/api/orderItem/**,/api/orderLog/**,/api/preferential/**,/api/returnCause/**,/api/returnOrder/**,/api/returnOrderItem/**
+          filters:
+            - StripPrefix=1
 
-#        对接微信支付服务
-      - id: changgou_pay_route
-        uri: lb://pay
-        predicates:
-        - Path=/api/weixin/pay/**,/api//weixin/pay/notify/url
-        filters:
-        - StripPrefix=1
+        # 对接微信支付服务
+        - id: changgou_pay_route
+          uri: lb://pay
+          predicates:
+            - Path=/api/weixin/pay/**,/api//weixin/pay/notify/url
+          filters:
+            - StripPrefix=1
 
   application:
     name: gateway-web
-  #Redis配置
+  # Redis配置
   redis:
     host: 192.168.8.6
     port: 6379
 server:
-  port: 8001
+  port: 9101
 eureka:
   client:
     service-url:

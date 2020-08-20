@@ -11,16 +11,18 @@
 
     <!--子模块-->
     <modules>
+        <module>changgou-canal</module>
+        <module>changgou-common</module>
+        <module>changgou-common-db</module>
         <module>changgou-gateway</module>
         <module>changgou-service</module>
         <module>changgou-service-api</module>
         <module>changgou-web</module>
         <module>changgou-eureka</module>
-        <module>changgou-common</module>
-        <module>changgou-common-db</module>
         <module>changgou-user-oauth</module>
     </modules>
 
+    <!--SringBoot父依赖-->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -51,7 +53,7 @@
             <artifactId>springfox-swagger2</artifactId>
             <version>2.6.1</version>
         </dependency>
-        <!---->
+        <!--swagger-->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>

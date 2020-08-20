@@ -24,8 +24,22 @@ eureka:
 feign:
   hystrix:
     enabled: true
+#hystrix 配置
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          #如果enabled设置为false，则请求超时交给ribbon控制
+          enabled: true
+        isolation:
+          strategy: SEMAPHORE
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
   mapper-locations: classpath:mapper/*Mapper.xml
   type-aliases-package: com.changgou.goods.pojo
+
+# 分布式ID生成器
+# workerId: 0
+# datacenterId: 0

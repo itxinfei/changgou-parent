@@ -13,36 +13,37 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.io.FileOutputStream;
 import java.util.Date;
 
-/**
- * @Author: Ye Jian Song
- * @Description:
- * @Date: Create in 19:49 2019/8/12
- */
+
 @SpringBootTest()
 @RunWith(SpringRunner.class)
 public class FastDFSFileTest {
 
+
+
+
     /**
      * 测试下载文件
+     *
      * @throws Exception
      */
     @Test
-    public void testDowloadFile() throws Exception{
+    public void testDowloadFile() throws Exception {
         String group_name = "group1";
         String remote_filename = "M00/00/00/wKjThF1WdAeARS2xAA3VG0zdyVY121.jpg";
         byte[] dowloadFile = FastDFSClient.dowloadFile(group_name, remote_filename);
-        IOUtils.write(dowloadFile,new FileOutputStream("F:/ee/1.jpg"));
+        IOUtils.write(dowloadFile, new FileOutputStream("F:/ee/1.jpg"));
     }
 
     /**
      * 删除文件
+     *
      * @throws Exception
      */
     @Test
-    public void deleteFile(){
+    public void deleteFile() {
         String group_name = "group1";
         String remote_filename = "M00/00/00/wKjThF1WdAeARS2xAA3VG0zdyVY121.jpg";
-       FastDFSClient.deleteFile(group_name,remote_filename);
+        FastDFSClient.deleteFile(group_name, remote_filename);
     }
 
 
@@ -50,7 +51,7 @@ public class FastDFSFileTest {
      * 测试获取附件信息
      */
     @Test
-    public void getFileInfo(){
+    public void getFileInfo() {
         String group_name = "group1";
         String remote_filename = "M00/00/00/wKjThF1WdAeARS2xAA3VG0zdyVY121.jpg";
         FileInfo fileInfo = FastDFSClient.getFileInfo(group_name, remote_filename);
@@ -69,7 +70,7 @@ public class FastDFSFileTest {
      * 获取储存服务器信息
      */
     @Test
-    public void getStorageServerInfo(){
+    public void getStorageServerInfo() {
         String group_name = "group1";
         StorageServer storageServer = FastDFSClient.getStorageServerInfo(group_name);
         String hostAddress = storageServer.getInetSocketAddress().getAddress().getHostAddress();
@@ -86,14 +87,15 @@ public class FastDFSFileTest {
      * 获得多个储存对象
      */
     @Test
-    public void getServerInfo(){
+    public void getServerInfo() {
         String group_name = "group1";
         String remote_filename = "M00/00/00/wKjThF1WdAeARS2xAA3VG0zdyVY121.jpg";
         ServerInfo[] serverInfos = FastDFSClient.getServerInfo(group_name, remote_filename);
         ServerInfo group = serverInfos[0];
         String ipAddr = group.getIpAddr();
         int port = group.getPort();
-        System.out.println("服务器IP："+ipAddr);
-        System.out.println("服务器端口："+port);
+        System.out.println("服务器IP：" + ipAddr);
+        System.out.println("服务器端口：" + port);
     }
+
 }

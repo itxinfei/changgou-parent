@@ -8,9 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.Map;
 
 /**
- * @Author: Ye Jian Song
- * @Description:
- * @Date: Create in 20:01 2019/8/19
+ *
  */
 @FeignClient(name = "search")
 @RequestMapping("/search")

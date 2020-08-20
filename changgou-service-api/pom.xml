@@ -19,6 +19,8 @@
         <module>changgou-service-order-api</module>
         <module>changgou-service-seckill-api</module>
         <module>changgou-service-pay-api</module>
+        <module>changgou-service-system-api</module>
+        <module>changgou-service-business-api</module>
     </modules>
 
     <dependencies>
@@ -34,13 +36,17 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
         <!--每个工程都有Pojo，都需要用到该包对应的注解-->
         <dependency>
             <groupId>javax.persistence</groupId>
             <artifactId>persistence-api</artifactId>
             <version>1.0</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>

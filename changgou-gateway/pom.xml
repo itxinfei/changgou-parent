@@ -12,6 +12,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>changgou-gateway-web</module>
+        <module>changgou_gateway_system</module>
     </modules>
 
     <!--网关依赖-->

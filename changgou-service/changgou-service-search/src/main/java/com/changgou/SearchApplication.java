@@ -9,12 +9,8 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 
 /**
- * @Author: Ye Jian Song
- * @Description:
- * @Date: Create in 18:43 2019/8/17
+ *
  */
-
-
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 @EnableEurekaClient
 @EnableFeignClients(basePackages = "com.changgou.goods.feign")

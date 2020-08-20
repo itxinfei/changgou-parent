@@ -10,13 +10,19 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>changgou-service-file</artifactId>
     <description>文件上传工程</description>
+
+
+
     <!--依赖包-->
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
         <dependency>
             <groupId>net.oschina.zcx7878</groupId>
             <artifactId>fastdfs-client-java</artifactId>
             <version>1.27.0.0</version>
-
         </dependency>
         <dependency>
             <groupId>com.changgou</groupId>

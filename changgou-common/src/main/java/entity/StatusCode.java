@@ -1,7 +1,7 @@
 package entity;
 
 /**
- * 返回码
+ * 返回状态码实体类
  */
 public class StatusCode {
     public static final int OK = 20000;//成功

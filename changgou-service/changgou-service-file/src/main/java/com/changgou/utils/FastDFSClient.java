@@ -4,37 +4,38 @@ import com.changgou.file.FastDFSFile;
 import org.apache.commons.lang.text.StrTokenizer;
 import org.csource.common.NameValuePair;
 import org.csource.fastdfs.*;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * 封装FastDFS的api工具类
  */
 public class FastDFSClient {
 
-    /**
-     *  初始化FastDFS配置
+    private static org.slf4j.Logger logger = LoggerFactory.getLogger(FastDFSClient.class);
+
+    /***
+     * 初始化加载FastDFS的TrackerServer配置
      */
     static {
-        String config_name = new ClassPathResource("fdfs_client.conf").getPath();
         try {
-            // 初始化FastDFS的配置文件
-            ClientGlobal.init(config_name);
+            String filePath = new ClassPathResource("fdfs_client.conf").getFile().getAbsolutePath();
+            ClientGlobal.init(filePath);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("FastDFS Client Init Fail!", e);
         }
     }
 
-
     /**
-     *
      * @param
-     * @param  fastDFSFile:附件信息
-     * @return java.lang.String[]
+     * @param fastDFSFile:附件信息
      * @return
      */
-   /* public static String[] uploadFile(FastDFSFile fastDFSFile){
+    public static String[] uploadFile(FastDFSFile fastDFSFile) {
         try {
             byte[] file_buff = fastDFSFile.getContent();
             String File_ext_name = fastDFSFile.getExt();
@@ -45,7 +46,7 @@ public class FastDFSClient {
             //根据句trackerClient获得跟踪服务器端
             TrackerServer trackerServer = trackerClient.getConnection();
             //创建文件上传储存服务器
-            StorageClient storageClient = new StorageClient(trackerServer,null);
+            StorageClient storageClient = new StorageClient(trackerServer, null);
             // 4、文件上传
             String[] uploadResult = storageClient.upload_file(file_buff, File_ext_name, meta_list);
             return uploadResult;
@@ -53,17 +54,18 @@ public class FastDFSClient {
             e.printStackTrace();
         }
         return null;
-    }*/
+    }
 
 
     /**
      * 上传文件
+     *
      * @param
      * @param
      * @param
      * @return
      */
-    public static String[] uploadFile(byte[] file_buff,String file_ext_name,String des){
+    public static String[] uploadFile(byte[] file_buff, String file_ext_name, String des) {
         try {
             NameValuePair[] meta_list = new NameValuePair[1];
             meta_list[0] = new NameValuePair(des);
@@ -72,7 +74,7 @@ public class FastDFSClient {
             //根据句trackerClient获得跟踪服务器端
             TrackerServer trackerServer = trackerClient.getConnection();
             //创建文件上传储存服务器
-            StorageClient storageClient = new StorageClient(trackerServer,null);
+            StorageClient storageClient = new StorageClient(trackerServer, null);
             String[] uploadResult = storageClient.upload_file(file_buff, file_ext_name, meta_list);
             return uploadResult;
         } catch (Exception e) {
@@ -84,18 +86,19 @@ public class FastDFSClient {
 
     /**
      * 下载文件
+     *
      * @param
      * @param
      * @return
      */
-    public static byte[] dowloadFile(String group_name,String remote_filename){
+    public static byte[] dowloadFile(String group_name, String remote_filename) {
         try {
             //创建跟踪服务器客户端
             TrackerClient trackerClient = new TrackerClient();
             //根据句trackerClient获得跟踪服务器端
             TrackerServer trackerServer = trackerClient.getConnection();
             //创建文件上传储存服务器
-            StorageClient storageClient = new StorageClient(trackerServer,null);
+            StorageClient storageClient = new StorageClient(trackerServer, null);
             byte[] downloadFile = storageClient.download_file(group_name, remote_filename);
             return downloadFile;
         } catch (Exception e) {
@@ -107,17 +110,18 @@ public class FastDFSClient {
 
     /**
      * 删除文件
-     * @param group_name :组名
+     *
+     * @param group_name      :组名
      * @param remote_filename :文件名
      */
-    public static void deleteFile(String group_name,String remote_filename){
+    public static void deleteFile(String group_name, String remote_filename) {
         try {
             //创建跟踪服务器客户端
             TrackerClient trackerClient = new TrackerClient();
             //根据句trackerClient获得跟踪服务器端
             TrackerServer trackerServer = trackerClient.getConnection();
             //创建文件上传储存服务器
-            StorageClient storageClient = new StorageClient(trackerServer,null);
+            StorageClient storageClient = new StorageClient(trackerServer, null);
             storageClient.delete_file(group_name, remote_filename);
         } catch (Exception e) {
             e.printStackTrace();
@@ -127,11 +131,12 @@ public class FastDFSClient {
 
     /**
      * 获取附件信息
+     *
      * @param group_name
      * @param remote_filename
      * @return
      */
-    public static FileInfo getFileInfo(String group_name,String remote_filename){
+    public static FileInfo getFileInfo(String group_name, String remote_filename) {
         try {
             // 1、创建跟踪服务器客户端
             TrackerClient trackerClient = new TrackerClient();
@@ -149,12 +154,13 @@ public class FastDFSClient {
     }
 
 
-    /**获取存储服务器信息
+    /**
+     * 获取存储服务器信息
      *
      * @param group_name
      * @return
      */
-    public static StorageServer getStorageServerInfo(String group_name){
+    public static StorageServer getStorageServerInfo(String group_name) {
         try {
             // 1、创建跟踪服务器客户端
             TrackerClient trackerClient = new TrackerClient();
@@ -172,9 +178,10 @@ public class FastDFSClient {
 
     /**
      * 获得多个储存对象服务器
+     *
      * @return
      */
-    public static ServerInfo[] getServerInfo(String group_name,String file_name){
+    public static ServerInfo[] getServerInfo(String group_name, String file_name) {
         try {
             // 1、创建跟踪服务器客户端
             TrackerClient trackerClient = new TrackerClient();
@@ -192,9 +199,10 @@ public class FastDFSClient {
 
     /**
      * 获取拼接上传图片的地址url
+     *
      * @return
      */
-    public static String getServerUrl(){
+    public static String getServerUrl() {
         try {
             // 1、创建跟踪服务器客户端
             TrackerClient trackerClient = new TrackerClient();

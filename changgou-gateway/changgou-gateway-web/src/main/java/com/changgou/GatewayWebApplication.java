@@ -9,7 +9,7 @@ import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
 /**
- *  网关
+ * 网关
  */
 @SpringBootApplication
 @EnableEurekaClient
@@ -20,7 +20,14 @@ public class GatewayWebApplication {
 
     /***
      * IP限流
-     * @return
+     * KeyResolver用于计算某一个类型的限流的KEY也就是说，可以通过KeyResolver来指定限流的Key。
+     *
+     *  网关限流：
+     *  1、令牌桶算法
+     *  2、漏桶算法
+     *  3、计数算法
+     *  未达到流量阈值--放行请求
+     *  达到流量阈值--返回429
      */
     @Bean(name = "ipKeyResolver")
     public KeyResolver keyResolver() {
@@ -34,5 +41,4 @@ public class GatewayWebApplication {
             }
         };
     }
-
 }

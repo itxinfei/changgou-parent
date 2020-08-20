@@ -3,7 +3,7 @@ package entity;
 import java.util.List;
 
 /**
- * 分页结果类
+ * 用于承载分页的数据结果
  */
 public class PageResult<T> {
 

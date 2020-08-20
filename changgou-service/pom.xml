@@ -21,6 +21,8 @@
         <module>changgou-service-order</module>
         <module>changgou-service-pay</module>
         <module>changgou-service-seckill</module>
+        <module>changgou-service-system</module>
+        <module>changgou-service-business</module>
     </modules>
 
     <!--依赖-->

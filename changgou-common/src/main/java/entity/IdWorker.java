@@ -5,6 +5,7 @@ import java.net.InetAddress;
 import java.net.NetworkInterface;
 
 /**
+ * 雪花算法(snowflake)
  * <p>名称：IdWorker.java</p>
  * <p>描述：分布式自增长ID</p>
  * <pre>
@@ -52,15 +53,14 @@ public class IdWorker {
     // 数据标识id部分
     private final long datacenterId;
 
-    public IdWorker(){
+    public IdWorker() {
         this.datacenterId = getDatacenterId(maxDatacenterId);
         this.workerId = getMaxWorkerId(datacenterId, maxWorkerId);
     }
+
     /**
-     * @param workerId
-     *            工作机器ID
-     * @param datacenterId
-     *            序列号
+     * @param workerId     工作机器ID
+     * @param datacenterId 序列号
      */
     public IdWorker(long workerId, long datacenterId) {
         if (workerId > maxWorkerId || workerId < 0) {
@@ -72,6 +72,7 @@ public class IdWorker {
         this.workerId = workerId;
         this.datacenterId = datacenterId;
     }
+
     /**
      * 获取下一个ID
      *
@@ -162,8 +163,8 @@ public class IdWorker {
 
     public static void main(String[] args) {
         //推特  26万个不重复的ID
-        IdWorker idWorker = new IdWorker(0,0);
-        for (int i = 0; i <2600 ; i++) {
+        IdWorker idWorker = new IdWorker(0, 0);
+        for (int i = 0; i < 2600; i++) {
             System.out.println(idWorker.nextId());
         }
     }
