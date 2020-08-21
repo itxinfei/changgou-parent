@@ -13,6 +13,7 @@
     <modules>
         <module>changgou-web-search</module>
         <module>changgou-web-item</module>
+        <module>changgou-web-order</module>
+        <module>changgou-web-seckill</module>
     </modules>
-
 </project>

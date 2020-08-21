@@ -34,7 +34,13 @@ spring:
             - Path=/api/user/**,/api/address/**,/api/areas/**,/api/cities/**,/api/provinces/**
           filters:
             - StripPrefix=1
-
+        #认证微服务
+        - id: changgou_oauth_user
+          uri: lb://user-auth
+          predicates:
+            - Path=/api/oauth/**
+          filters:
+            - StripPrefix=1
         # 对接订单服务
         - id: changgou_order_route
           uri: lb://order
@@ -42,12 +48,32 @@ spring:
             - Path=/api/cart/**,/api/categoryReport/**,/api/orderConfig/**,/api/order/**,/api/orderItem/**,/api/orderLog/**,/api/preferential/**,/api/returnCause/**,/api/returnOrder/**,/api/returnOrderItem/**
           filters:
             - StripPrefix=1
-
         # 对接微信支付服务
         - id: changgou_pay_route
           uri: lb://pay
           predicates:
             - Path=/api/weixin/pay/**,/api//weixin/pay/notify/url
+          filters:
+            - StripPrefix=1
+        #购物车订单渲染微服务
+        - id: changgou_order_web_route
+          uri: lb://order-web
+          predicates:
+            - Path=/api/wcart/**,/api/worder/**,/api/wxpay/**
+          filters:
+            - StripPrefix=1
+        #秒杀微服务
+        - id: changgou_seckill_route
+          uri: lb://seckill
+          predicates:
+            - Path=/api/seckill/**
+          filters:
+            - StripPrefix=1
+        #秒杀渲染微服务
+        - id: changgou_seckill_web_route
+          uri: lb://seckill-web
+          predicates:
+            - Path=/api/wseckillgoods/**
           filters:
             - StripPrefix=1
 
