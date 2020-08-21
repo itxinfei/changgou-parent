@@ -21,4 +21,12 @@ public interface CategoryFeign {
      */
     @GetMapping("/{id}")
      Result<Category> findById(@PathVariable(name = "id") Integer id);
+
+    /***
+     * 根据ID查询数据
+     * @param id
+     * @return
+     */
+    @GetMapping("/findCategoryById/{id}")
+    public Category findCategoryById(@PathVariable(name = "id") Integer id);
 }

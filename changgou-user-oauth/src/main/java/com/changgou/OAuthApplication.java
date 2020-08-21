@@ -11,11 +11,9 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.client.RestTemplate;
 import tk.mybatis.spring.annotation.MapperScan;
 
-/*****
- * @Author: 传智播客
- * @Date: 2019/7/6 8:01
- * @Description: com.changgou
- ****/
+/**
+ *
+ */
 @SpringBootApplication
 @EnableDiscoveryClient
 @MapperScan(basePackages = "com.changgou.auth.dao")
@@ -23,9 +21,8 @@ import tk.mybatis.spring.annotation.MapperScan;
 public class OAuthApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(OAuthApplication.class,args);
+        SpringApplication.run(OAuthApplication.class, args);
     }
-
 
     @Bean(name = "restTemplate")
     public RestTemplate restTemplate() {

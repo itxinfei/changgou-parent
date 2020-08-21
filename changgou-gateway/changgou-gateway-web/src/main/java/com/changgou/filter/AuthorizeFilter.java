@@ -13,9 +13,7 @@ import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
 /**
- * @Author: Ye Jian Song
- * @Description:
- * @Date: Create in 12:21 2019/8/23
+ *
  */
 @Component
 public class AuthorizeFilter implements GlobalFilter, Ordered {
@@ -29,6 +27,7 @@ public class AuthorizeFilter implements GlobalFilter, Ordered {
 
     /**
      * 指定过滤器的优先级
+     *
      * @param exchange
      * @param chain
      * @return
@@ -41,30 +40,30 @@ public class AuthorizeFilter implements GlobalFilter, Ordered {
 
         // 判断用户是否是登录操作，如果是，则直接放行
         String url = request.getURI().getPath();
-        if (URLFilter.hasAuthorization(url)){
-        // 如果是登陆 或者注册 放行
-        return chain.filter(exchange);
+        if (URLFilter.hasAuthorization(url)) {
+            // 如果是登陆 或者注册 放行
+            return chain.filter(exchange);
         }
 
         // 其他请求判断用户是否登录(判断用户是否携带token信息，从请求参数获得token)
         String token = request.getQueryParams().getFirst(AUTHORIZE_TOKEN);
         // 从请求头获得token
-        if (StringUtils.isEmpty(token)){
+        if (StringUtils.isEmpty(token)) {
             token = request.getHeaders().getFirst(AUTHORIZE_TOKEN);
         }
         // 如果请求头中不包含token就从cooKie中获取
-        if (StringUtils.isEmpty(token)){
+        if (StringUtils.isEmpty(token)) {
             HttpCookie cookie = request.getCookies().getFirst(AUTHORIZE_TOKEN);
-            if (cookie != null){
-               token = cookie.getValue();
+            if (cookie != null) {
+                token = cookie.getValue();
             }
         }
         // 如果还是没有获取到token说明用户处于未登录状态，不放行(无效认证)
-        if (StringUtils.isEmpty(token)){
+        if (StringUtils.isEmpty(token)) {
             // 如果用户未登录,踢回登录页面
             response.setStatusCode(HttpStatus.SEE_OTHER);
             String path = LOGIN_URL + "?ReturnUrl=" + request.getURI().toString();
-            response.getHeaders().add("Location",path);
+            response.getHeaders().add("Location", path);
             return response.setComplete();
             // 响应未登录状态
 //            response.setStatusCode(HttpStatus.UNAUTHORIZED);
@@ -77,7 +76,7 @@ public class AuthorizeFilter implements GlobalFilter, Ordered {
 //            request.mutate().header("Authorization_Token",token);
             //  由oauth生成令牌
             // 将token添加到请求头信息,有对应的微服务去解析
-            request.mutate().header(AUTHORIZE_TOKEN,"bearer "+ token);
+            request.mutate().header(AUTHORIZE_TOKEN, "bearer " + token);
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("token非法！！！！！！！！！");
@@ -92,6 +91,7 @@ public class AuthorizeFilter implements GlobalFilter, Ordered {
 
     /**
      * 处理业务
+     *
      * @return
      */
     @Override

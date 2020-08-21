@@ -44,19 +44,17 @@ public class EsManagerServiceImpl implements EsManagerService {
 
     /**
      * 根据spuid导入数据到ES索引库
+     *
      * @param spuId 商品id
      */
     @Override
     public void importDataToESBySpuId(String spuId) {
-        Long id =0;
-        List<Sku> skuList = skuFeign.findById(id);
+        List<Sku> skuList = (List<Sku>) skuFeign.findById(spuId);
         List<SkuInfo> skuInfos = JSON.parseArray(JSON.toJSONString(skuList), SkuInfo.class);
 
         for (SkuInfo skuInfo : skuInfos) {
             skuInfo.setSpecMap(JSON.parseObject(skuInfo.getSpec(), Map.class));
         }
-
-
         searchMapper.saveAll(skuInfos);
     }
 
@@ -66,8 +64,8 @@ public class EsManagerServiceImpl implements EsManagerService {
     @Override
     public void importAll() {
         Map paramMap = new HashMap();
-        paramMap.put("status", "1");
-        Result result = skuFeign.findList(paramMap);
+        Object put = paramMap.put("status", "1");
+        Result result = skuFeign.findList((Sku) put);
         List<SkuInfo> skuInfos = JSON.parseArray(JSON.toJSONString(result.getData()), SkuInfo.class);
         for (SkuInfo skuInfo : skuInfos) {
             skuInfo.setPrice(skuInfo.getPrice());

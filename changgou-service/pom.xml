@@ -23,6 +23,7 @@
         <module>changgou-service-seckill</module>
         <module>changgou-service-system</module>
         <module>changgou-service-business</module>
+        <module>changgou-service-page</module>
     </modules>
 
     <!--依赖-->

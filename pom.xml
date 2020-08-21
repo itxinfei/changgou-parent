@@ -20,6 +20,7 @@
         <module>changgou-web</module>
         <module>changgou-eureka</module>
         <module>changgou-user-oauth</module>
+        <module>changgou-service-page</module>
     </modules>
 
     <!--SringBoot父依赖-->
