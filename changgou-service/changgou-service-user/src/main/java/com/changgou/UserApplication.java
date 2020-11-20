@@ -1,6 +1,6 @@
 package com.changgou;
 
-import entity.TokenDecode;
+import com.changgou.entity.TokenDecode;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;

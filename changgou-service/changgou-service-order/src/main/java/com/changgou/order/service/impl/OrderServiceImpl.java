@@ -1,5 +1,6 @@
 package com.changgou.order.service.impl;
 
+import com.changgou.entity.IdWorker;
 import com.changgou.goods.feign.SkuFeign;
 import com.changgou.order.dao.OrderItemMapper;
 import com.changgou.order.dao.OrderMapper;
@@ -10,7 +11,6 @@ import com.changgou.order.service.OrderService;
 import com.changgou.user.feign.UserFeign;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import entity.IdWorker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;

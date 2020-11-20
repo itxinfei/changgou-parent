@@ -19,7 +19,10 @@ public class SkuController {
     @Autowired
     private SkuService skuService;
 
-
+    /**
+     * @param username
+     * @return
+     */
     @GetMapping("/decr/{username}")
     public Result decr(@PathVariable(value = "username") String username) {
         skuService.decrCount(username);

@@ -1,8 +1,7 @@
 package com.changgou.goods.feign;
 
+import com.changgou.entity.Result;
 import com.changgou.goods.pojo.Sku;
-import entity.Result;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 

@@ -28,7 +28,7 @@ public class HtmlGeneratListener {
         //将数据转成JSON
         Message message = JSON.parseObject(msg, Message.class);
         if (message.getCode() == 2) {
-            pageFeign.createHtml(Long.parseLong(message.getContent().toString()));
+           // pageFeign.createHtml(Long.parseLong(message.getContent().toString()));
         }
     }
 }

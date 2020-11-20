@@ -18,7 +18,6 @@ public class TemplateController {
     @Autowired
     private TemplateService templateService;
 
-
     /**
      * 根据分类数据id查询模板对象
      *

@@ -1,6 +1,7 @@
 package com.changgou.order.controller;
 
 import com.changgou.entity.Result;
+import com.changgou.entity.StatusCode;
 import com.changgou.order.pojo.ReturnCause;
 import com.changgou.order.service.ReturnCauseService;
 import com.github.pagehelper.PageInfo;
@@ -34,7 +35,7 @@ public class ReturnCauseController {
     public Result<PageInfo> findPage(@RequestBody(required = false)  ReturnCause returnCause, @PathVariable  int page, @PathVariable  int size){
         //调用ReturnCauseService实现分页条件查询ReturnCause
         PageInfo<ReturnCause> pageInfo = returnCauseService.findPage(returnCause, page, size);
-        return new Result(true,StatusCode.OK,"查询成功",pageInfo);
+        return new Result(true, StatusCode.OK,"查询成功",pageInfo);
     }
 
     /***

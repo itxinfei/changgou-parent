@@ -1,16 +1,14 @@
 package com.changgou.order.service.impl;
 
+import com.changgou.entity.Result;
 import com.changgou.goods.feign.SkuFeign;
 import com.changgou.goods.feign.SpuFeign;
 import com.changgou.goods.pojo.Sku;
 import com.changgou.goods.pojo.Spu;
 import com.changgou.order.pojo.OrderItem;
 import com.changgou.order.service.CartService;
-import entity.Result;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -47,8 +45,8 @@ public class CartServiceImpl implements CartService {
         }
 
         // 获得商品库存信息
-        Result<Sku> skuResult = skuFeign.findById(skuId.toString());
-        if (skuResult != null && skuResult.getData() != null) {
+        //Result<Sku> skuResult = skuFeign.findById(skuId.toString());
+        /*if (skuResult != null && skuResult.getData() != null) {
             //获取sku
             Sku sku = skuResult.getData();
             // 获得spu数据
@@ -58,7 +56,7 @@ public class CartServiceImpl implements CartService {
             // 将商品存到redis中
             redisTemplate.boundHashOps("cart_" + username).put(skuId, orderItem);
             //redisTemplate.opsForHash().get("cart_ "+ username,skuId);
-        }
+        }*/
     }
 
 

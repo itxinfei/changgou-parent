@@ -6,7 +6,6 @@ import com.changgou.entity.TokenDecode;
 import com.changgou.user.pojo.Address;
 import com.changgou.user.service.AddressService;
 import com.github.pagehelper.PageInfo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;

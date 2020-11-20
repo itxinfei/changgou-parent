@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- *
+ * 品牌管理
  */
 @RestController
 @RequestMapping("/brand")
-@CrossOrigin
+@CrossOrigin//使用注解实现跨域
 public class BrandController {
 
     @Autowired

@@ -18,7 +18,6 @@ public class ParaController {
     @Autowired
     private ParaService paraService;
 
-
     /**
      * 根据模板id查询参数列表查询
      *

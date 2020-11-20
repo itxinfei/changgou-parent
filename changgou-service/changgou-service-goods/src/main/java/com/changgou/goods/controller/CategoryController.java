@@ -20,7 +20,6 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
-
     /**
      * 一次请求获得回显数据成功
      *

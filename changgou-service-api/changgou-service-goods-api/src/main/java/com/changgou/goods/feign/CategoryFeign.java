@@ -1,7 +1,7 @@
 package com.changgou.goods.feign;
 
+import com.changgou.entity.Result;
 import com.changgou.goods.pojo.Category;
-import entity.Result;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,11 +16,12 @@ public interface CategoryFeign {
 
     /**
      * 获取分类的商品信息
+     *
      * @param id
      * @return
      */
     @GetMapping("/{id}")
-     Result<Category> findById(@PathVariable(name = "id") Integer id);
+    Result<Category> findById(@PathVariable(name = "id") Integer id);
 
     /***
      * 根据ID查询数据

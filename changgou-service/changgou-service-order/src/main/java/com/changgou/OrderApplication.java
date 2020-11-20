@@ -1,8 +1,8 @@
 package com.changgou;
 
-import entity.FeignInterceptor;
-import entity.IdWorker;
-import entity.TokenDecode;
+import com.changgou.entity.FeignInterceptor;
+import com.changgou.entity.IdWorker;
+import com.changgou.entity.TokenDecode;
 import feign.RequestInterceptor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
