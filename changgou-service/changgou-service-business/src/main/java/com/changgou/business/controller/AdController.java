@@ -1,14 +1,17 @@
 package com.changgou.business.controller;
+
+import com.changgou.business.pojo.Ad;
+import com.changgou.business.service.AdService;
 import com.changgou.entity.PageResult;
 import com.changgou.entity.Result;
 import com.changgou.entity.StatusCode;
-import com.changgou.business.service.AdService;
-import com.changgou.business.pojo.Ad;
 import com.github.pagehelper.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 import java.util.Map;
+
 @RestController
 @CrossOrigin
 @RequestMapping("/ad")
@@ -20,12 +23,13 @@ public class AdController {
 
     /**
      * 查询全部数据
+     *
      * @return
      */
     @GetMapping
-    public Result findAll(){
+    public Result findAll() {
         List<Ad> adList = adService.findAll();
-        return new Result(true, StatusCode.OK,"查询成功",adList) ;
+        return new Result(true, StatusCode.OK, "查询成功", adList);
     }
 
     /***
@@ -34,9 +38,9 @@ public class AdController {
      * @return
      */
     @GetMapping("/{id}")
-    public Result findById(@PathVariable Integer id){
+    public Result findById(@PathVariable Integer id) {
         Ad ad = adService.findById(id);
-        return new Result(true,StatusCode.OK,"查询成功",ad);
+        return new Result(true, StatusCode.OK, "查询成功", ad);
     }
 
 
@@ -46,9 +50,9 @@ public class AdController {
      * @return
      */
     @PostMapping
-    public Result add(@RequestBody Ad ad){
+    public Result add(@RequestBody Ad ad) {
         adService.add(ad);
-        return new Result(true,StatusCode.OK,"添加成功");
+        return new Result(true, StatusCode.OK, "添加成功");
     }
 
 
@@ -58,11 +62,11 @@ public class AdController {
      * @param id
      * @return
      */
-    @PutMapping(value="/{id}")
-    public Result update(@RequestBody Ad ad,@PathVariable Integer id){
+    @PutMapping(value = "/{id}")
+    public Result update(@RequestBody Ad ad, @PathVariable Integer id) {
         ad.setId(id);
         adService.update(ad);
-        return new Result(true,StatusCode.OK,"修改成功");
+        return new Result(true, StatusCode.OK, "修改成功");
     }
 
 
@@ -71,10 +75,10 @@ public class AdController {
      * @param id
      * @return
      */
-    @DeleteMapping(value = "/{id}" )
-    public Result delete(@PathVariable Integer id){
+    @DeleteMapping(value = "/{id}")
+    public Result delete(@PathVariable Integer id) {
         adService.delete(id);
-        return new Result(true,StatusCode.OK,"删除成功");
+        return new Result(true, StatusCode.OK, "删除成功");
     }
 
     /***
@@ -82,10 +86,10 @@ public class AdController {
      * @param searchMap
      * @return
      */
-    @GetMapping(value = "/search" )
-    public Result findList(@RequestParam Map searchMap){
+    @GetMapping(value = "/search")
+    public Result findList(@RequestParam Map searchMap) {
         List<Ad> list = adService.findList(searchMap);
-        return new Result(true,StatusCode.OK,"查询成功",list);
+        return new Result(true, StatusCode.OK, "查询成功", list);
     }
 
 
@@ -96,11 +100,11 @@ public class AdController {
      * @param size
      * @return
      */
-    @GetMapping(value = "/search/{page}/{size}" )
-    public Result findPage(@RequestParam Map searchMap, @PathVariable  int page, @PathVariable  int size){
+    @GetMapping(value = "/search/{page}/{size}")
+    public Result findPage(@RequestParam Map searchMap, @PathVariable int page, @PathVariable int size) {
         Page<Ad> pageList = adService.findPage(searchMap, page, size);
-        PageResult pageResult=new PageResult(pageList.getTotal(),pageList.getResult());
-        return new Result(true,StatusCode.OK,"查询成功",pageResult);
+        PageResult pageResult = new PageResult(pageList.getTotal(), pageList.getResult());
+        return new Result(true, StatusCode.OK, "查询成功", pageResult);
     }
 
 

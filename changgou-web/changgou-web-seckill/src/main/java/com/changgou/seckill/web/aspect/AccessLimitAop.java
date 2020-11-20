@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.changgou.entity.Result;
 import com.changgou.entity.StatusCode;
 import com.google.common.util.concurrent.RateLimiter;
+import entity.Result;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -32,10 +33,8 @@ public class AccessLimitAop {
 
     @Around("limit()")
     public Object around(ProceedingJoinPoint proceedingJoinPoint){
-
         boolean flag = rateLimiter.tryAcquire();
         Object obj = null; //返回值
-
         if (flag){
             //允许访问
             try {
@@ -49,7 +48,6 @@ public class AccessLimitAop {
             //将信息返回到客户端上
             this.outMessage(response,errorMessage);
         }
-
         return obj;
     }
 

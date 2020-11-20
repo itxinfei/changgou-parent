@@ -10,9 +10,10 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>changgou-gateway</artifactId>
     <packaging>pom</packaging>
+    
     <modules>
         <module>changgou-gateway-web</module>
-        <module>changgou_gateway_system</module>
+        <module>changgou-gateway-system</module>
     </modules>
 
     <!--网关依赖-->

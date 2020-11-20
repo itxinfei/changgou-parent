@@ -1,20 +1,16 @@
 package com.changgou.goods.controller;
 
+import com.changgou.entity.Result;
+import com.changgou.entity.StatusCode;
 import com.changgou.goods.pojo.Spec;
 import com.changgou.goods.service.SpecService;
 import com.github.pagehelper.PageInfo;
-import entity.Result;
-import entity.StatusCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/****
- * @Author:传智播客
- * @Description:
- * @Date 2019/6/14 0:18
- *****/
+
 
 @RestController
 @RequestMapping("/spec")
@@ -32,7 +28,7 @@ public class SpecController {
     @GetMapping(value = "/list/{categoryId}")
     public Result<Spec> findSpecByCategoryId(@PathVariable(value = "categoryId")Integer categoryId){
         List<Spec> specList = specService.findSpecByCategoryId(categoryId);
-        return new Result<Spec>(true,StatusCode.OK,"属性数据查询成功",specList);
+        return new Result<Spec>(true, StatusCode.OK,"属性数据查询成功",specList);
     }
 
 

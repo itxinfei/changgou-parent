@@ -1,4 +1,4 @@
-package entity;
+package com.changgou.entity;
 
 import java.io.Serializable;
 import java.util.List;

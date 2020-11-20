@@ -1,12 +1,12 @@
 package com.changgou.search.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.changgou.entity.Result;
 import com.changgou.goods.feign.SkuFeign;
 import com.changgou.goods.pojo.Sku;
 import com.changgou.search.dao.SkuInfoMapper;
 import com.changgou.search.pojo.SkuInfo;
 import com.changgou.search.service.SkuInfoService;
-import entity.Result;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.common.text.Text;
 import org.elasticsearch.index.query.BoolQueryBuilder;
@@ -34,11 +34,6 @@ import org.springframework.util.StringUtils;
 
 import java.util.*;
 
-/**
- * @Author: Ye Jian Song
- * @Description:
- * @Date: Create in 20:05 2019/8/17
- */
 @Service
 public class SkuInfoServiceImpl implements SkuInfoService {
 
@@ -58,7 +53,7 @@ public class SkuInfoServiceImpl implements SkuInfoService {
     @Override
     public void importDateToEs() {
         // 查询数据库的List<Sku>
-        Result<List<Sku>> result = skuFegin.findSkusByStatus("1");
+        /*Result<List<Sku>> result = skuFegin.findSkusByStatus("1");
         List<Sku> skuList = result.getData();
         String text = JSON.toJSONString(skuList);
         // 处理结果集List<SkuInfo>
@@ -73,12 +68,13 @@ public class SkuInfoServiceImpl implements SkuInfoService {
             }
         }
         // 保存数据
-        skuInfoMapper.saveAll(skuInfoList);
+        skuInfoMapper.saveAll(skuInfoList);*/
     }
 
 
     /**
      * 关键字检索
+     *
      * @param searchMap
      * @return
      */
@@ -97,7 +93,7 @@ public class SkuInfoServiceImpl implements SkuInfoService {
         // 获取数据的总条数
         String totalElements = resultMap.get("TotalElements").toString();
         int totalSize = Integer.parseInt(totalElements);
-        if (totalSize <= 0){
+        if (totalSize <= 0) {
             //判断totalSize是否小于等于0，如果小于等于0会报角标越界异常，需要给totalSize设置默认值防止报错
             totalSize = 10000;
         }
@@ -105,7 +101,7 @@ public class SkuInfoServiceImpl implements SkuInfoService {
 //        Map<String, Set<String>> specList = searchSpecList(builder,totalSize);
 //        resultMap.put("specList", specList);
         // 6.将检索的结果封装到map中
-        Map<String, Object> map = searchGroupList(builder,totalSize);
+        Map<String, Object> map = searchGroupList(builder, totalSize);
         resultMap.putAll(map);
         return resultMap;
     }
@@ -113,10 +109,11 @@ public class SkuInfoServiceImpl implements SkuInfoService {
 
     /**
      * 统计规格分类列表查询, 品牌分类列表查询 ,商品分类分组统计实现(封装一个方法返回所有检索条件结果返回)
+     *
      * @param builder
      * @return
      */
-    private  Map<String, Object> searchGroupList(NativeSearchQueryBuilder builder, int totalSize) {
+    private Map<String, Object> searchGroupList(NativeSearchQueryBuilder builder, int totalSize) {
         // 聚合查询   (分类)                                       别名                对应kibana中的字段
         builder.addAggregation(AggregationBuilders.terms("skuCategory").field("categoryName").size(totalSize));
         // 聚合查询   (品牌)                                       别名                对应kibana中的字段
@@ -128,28 +125,29 @@ public class SkuInfoServiceImpl implements SkuInfoService {
         //处理结果集
         Aggregations aggregations = page.getAggregations();
         // 统计分类
-        List<String> categoryList = getGroupList(aggregations,"skuCategory");
+        List<String> categoryList = getGroupList(aggregations, "skuCategory");
         // 统计品牌
-        List<String> brandList = getGroupList(aggregations,"skuBrand");
+        List<String> brandList = getGroupList(aggregations, "skuBrand");
         // 统计规格
-        List<String> spceList = getGroupList(aggregations,"skuSpec");
+        List<String> spceList = getGroupList(aggregations, "skuSpec");
         // 将统计规格的List结果集转成Map返回
         Map<String, Set<String>> specmap = pullMap(spceList);
         // 将所有的数据封装Map
         Map<String, Object> map = new HashMap<>();
-        map.put("categoryList",categoryList);
-        map.put("brandList",brandList);
-        map.put("spceList",specmap);
+        map.put("categoryList", categoryList);
+        map.put("brandList", brandList);
+        map.put("spceList", specmap);
         // 返回最终结果集
         return map;
     }
 
     /**
      * 处理聚合查询(分类，品牌，品牌)结果集
-     * @param skuCategory
+     *
+     * @param
      * @return
      */
-    private List<String> getGroupList(Aggregations aggregations,String groupName) {
+    private List<String> getGroupList(Aggregations aggregations, String groupName) {
         //获得词条数据
         StringTerms stringTerms = aggregations.get(groupName);
         List<StringTerms.Bucket> buckets = stringTerms.getBuckets();
@@ -161,13 +159,13 @@ public class SkuInfoServiceImpl implements SkuInfoService {
     }
 
 
-
     /**
      * 统计规格分类列表查询
+     *
      * @param builder
      * @return
      */
-    private Map<String, Set<String>> searchSpecList(NativeSearchQueryBuilder builder,Integer totalSize) {
+    private Map<String, Set<String>> searchSpecList(NativeSearchQueryBuilder builder, Integer totalSize) {
         // 分组查询获得List                                   别名             对应kibana中的字段     每页加载的数据条数，写索引库的数据总数
         builder.addAggregation(AggregationBuilders.terms("skuSpec").field("spec.keyword").size(totalSize));
         // 分组结果集
@@ -185,14 +183,14 @@ public class SkuInfoServiceImpl implements SkuInfoService {
         // 获取的数据，列如数据内容:
         // {"电视音响效果":"小影院","电视屏幕尺寸":"20英寸","尺码":"170"}
         // 处理数据
-       Map<String,Set<String>> map = pullMap(list);
+        Map<String, Set<String>> map = pullMap(list);
         return map;
     }
 
 
-
     /**
      * 处理规格数据封装Map
+     *
      * @param list
      * @return
      */
@@ -200,7 +198,7 @@ public class SkuInfoServiceImpl implements SkuInfoService {
         Map<String, Set<String>> map = new HashMap<>();
         for (String spec : list) {
             // 将字符JSON数据转Map
-            Map<String,String> specMap = JSON.parseObject(spec, Map.class);
+            Map<String, String> specMap = JSON.parseObject(spec, Map.class);
             // 遍历map
             Set<Map.Entry<String, String>> entrySet = specMap.entrySet();
             for (Map.Entry<String, String> entry : entrySet) {
@@ -211,13 +209,13 @@ public class SkuInfoServiceImpl implements SkuInfoService {
                 // value是多个且不能重复使用Set集合存储
                 // 首先判断map中是否有set
                 Set<String> set = map.get(key);
-                if (set == null){
-                // 判断set是否为空，如果是空就new HashSet
+                if (set == null) {
+                    // 判断set是否为空，如果是空就new HashSet
                     set = new HashSet<>();
                 }
                 // set不为空就直接往里面添加数据
                 set.add(value);
-                map.put(key,set);
+                map.put(key, set);
             }
         }
         return map;
@@ -251,6 +249,7 @@ public class SkuInfoServiceImpl implements SkuInfoService {
 
     /**
      * 商品分类分组统计实现
+     *
      * @param builder
      * @return
      */
@@ -274,6 +273,7 @@ public class SkuInfoServiceImpl implements SkuInfoService {
 
     /**
      * 根据关键字进行检索
+     *
      * @param builder
      * @return
      */
@@ -290,7 +290,7 @@ public class SkuInfoServiceImpl implements SkuInfoService {
             @Override
             public <T> AggregatedPage<T> mapResults(SearchResponse response, Class<T> clazz, Pageable pageable) {
                 SearchHits hits = response.getHits();
-               List<T> list = new ArrayList<>();
+                List<T> list = new ArrayList<>();
                 // 处理结果集
                 for (SearchHit hit : hits) {
                     // Json数据，普通数据 ，要转换pojo
@@ -298,7 +298,7 @@ public class SkuInfoServiceImpl implements SkuInfoService {
                     SkuInfo skuInfo = JSON.parseObject(result, SkuInfo.class);
                     // 获取高亮的数据
                     HighlightField highlightField = hit.getHighlightFields().get("name");
-                    if (highlightField != null){
+                    if (highlightField != null) {
                         //有高亮数据
                         Text[] texts = highlightField.getFragments();
                         // 将普通的Sku名称(name)替换成高亮的名称(name)
@@ -308,28 +308,30 @@ public class SkuInfoServiceImpl implements SkuInfoService {
                     list.add((T) skuInfo);
                 }
                 // 高亮结果集，将高亮数据替换普通的结果集arg01:高亮对象   arg02:参数传过来的pageable     arg03:总条数
-                return new AggregatedPageImpl<>(list,pageable,hits.getTotalHits());
+                return new AggregatedPageImpl<>(list, pageable, hits.getTotalHits());
             }
         };
         NativeSearchQuery build = builder.build();
         //AggregatedPage<SkuInfo> page = elasticsearchTemplate.queryForPage(build, SkuInfo.class);
-        AggregatedPage<SkuInfo> page = elasticsearchTemplate.queryForPage(build,SkuInfo.class,searchResultMapper);
-        Map<String,Object> map = new HashMap<>();
+        AggregatedPage<SkuInfo> page = elasticsearchTemplate.queryForPage(build, SkuInfo.class, searchResultMapper);
+        Map<String, Object> map = new HashMap<>();
         //商品结果集
-        map.put("rows",page.getContent());
+        map.put("rows", page.getContent());
         //总条数
-        map.put("TotalElements",page.getTotalElements());
+        map.put("TotalElements", page.getTotalElements());
         //总页数
-        map.put("TotalPages",page.getTotalPages());
+        map.put("TotalPages", page.getTotalPages());
         // 分页当前页码
-        map.put("pageNum",build.getPageable().getPageNumber() + 1);
+        map.put("pageNum", build.getPageable().getPageNumber() + 1);
         // 每页显示条数
-        map.put("pageSize",build.getPageable().getPageSize());
+        map.put("pageSize", build.getPageable().getPageSize());
         return map;
     }
 
 
-    /**此方法用于封装检索条件
+    /**
+     * 此方法用于封装检索条件
+     *
      * @param searchMap
      * @return
      */
@@ -338,25 +340,25 @@ public class SkuInfoServiceImpl implements SkuInfoService {
         NativeSearchQueryBuilder builder = new NativeSearchQueryBuilder();
         // 添加过滤条件
         BoolQueryBuilder boolBuilder = new BoolQueryBuilder();
-        if (searchMap != null){
+        if (searchMap != null) {
 
             // 1.根据关键字检索
             String keywords = searchMap.get("keywords");
-            if (!StringUtils.isEmpty(keywords)){
-               builder.withQuery(QueryBuilders.matchQuery("name", keywords));
+            if (!StringUtils.isEmpty(keywords)) {
+                builder.withQuery(QueryBuilders.matchQuery("name", keywords));
             }
 
             // 继续拼接条件
             // 2.根据商品分类过滤
             String category = searchMap.get("category");
-            if (!StringUtils.isEmpty(category)){
-                boolBuilder.must(QueryBuilders.matchQuery("categoryName",category));
+            if (!StringUtils.isEmpty(category)) {
+                boolBuilder.must(QueryBuilders.matchQuery("categoryName", category));
             }
 
             // 3.根据商品品牌过滤
             String brand = searchMap.get("brand");
-            if (!StringUtils.isEmpty(brand)){
-                boolBuilder.must(QueryBuilders.matchQuery("brandName",brand));
+            if (!StringUtils.isEmpty(brand)) {
+                boolBuilder.must(QueryBuilders.matchQuery("brandName", brand));
             }
 
             // 4.根据商品规格过滤(选择的规格有多个)
@@ -364,22 +366,22 @@ public class SkuInfoServiceImpl implements SkuInfoService {
             Set<String> keys = searchMap.keySet();
             for (String key : keys) {
                 // 判断规格条件是否是spec_开头的
-                if (key.startsWith("spec_")){
-                    String value = searchMap.get(key).replace("\\","");
-                    boolBuilder.must(QueryBuilders.matchQuery("specMap." + key.substring(5) +".keyword", value));
+                if (key.startsWith("spec_")) {
+                    String value = searchMap.get(key).replace("\\", "");
+                    boolBuilder.must(QueryBuilders.matchQuery("specMap." + key.substring(5) + ".keyword", value));
                 }
             }
 
             // 5.根据商品价格过滤(区间段)
             String price = searchMap.get("price");
-            if (!StringUtils.isEmpty(price)){
-              // 页面传的价格式(min ~ max / >price /  <price)
+            if (!StringUtils.isEmpty(price)) {
+                // 页面传的价格式(min ~ max / >price /  <price)
                 String[] priceArray = price.split("-");
                 // 如果传的价格参数是一个就大于(>=)查询
                 boolBuilder.must(QueryBuilders.rangeQuery("price").gte(priceArray[0]));
-                if (priceArray.length > 1){
-                // 如果传的价格参数是两个就小于(<=)查询
-                boolBuilder.must(QueryBuilders.rangeQuery("price").lte(priceArray[1]));
+                if (priceArray.length > 1) {
+                    // 如果传的价格参数是两个就小于(<=)查询
+                    boolBuilder.must(QueryBuilders.rangeQuery("price").lte(priceArray[1]));
                 }
             }
 
@@ -388,16 +390,16 @@ public class SkuInfoServiceImpl implements SkuInfoService {
             String sortField = searchMap.get("sortField");
             // 排序的规则(ASC DESC)
             String sortRule = searchMap.get("sortRule");
-            if (!StringUtils.isEmpty(sortField)){
+            if (!StringUtils.isEmpty(sortField)) {
                 builder.withSort(SortBuilders.fieldSort(sortField).order(SortOrder.valueOf(sortRule)));
             }
         }
-            // 7. 将过滤的条件都加到builder中NativeSearchQueryBuilder
-            builder.withFilter(boolBuilder);
+        // 7. 将过滤的条件都加到builder中NativeSearchQueryBuilder
+        builder.withFilter(boolBuilder);
 
         // 8. 添加分页条件 age1:当前页（page）   age2：每页显示数据（size）
         String page = searchMap.get("pageNum");
-        if (StringUtils.isEmpty(page)){
+        if (StringUtils.isEmpty(page)) {
             // 默认起始页为第一页
             page = "1";
         }
@@ -405,11 +407,11 @@ public class SkuInfoServiceImpl implements SkuInfoService {
         // 动态获得前端传
         String size = searchMap.get("size");
         // 默认一页显示10条数据
-        if (StringUtils.isEmpty(size)){
+        if (StringUtils.isEmpty(size)) {
             size = "10";
         }
         int pageSize = Integer.parseInt(size);
-        Pageable pageable = PageRequest.of(pageNum - 1,pageSize);
+        Pageable pageable = PageRequest.of(pageNum - 1, pageSize);
         builder.withPageable(pageable);
         return builder;
     }

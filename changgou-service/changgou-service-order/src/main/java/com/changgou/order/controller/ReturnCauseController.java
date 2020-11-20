@@ -1,10 +1,9 @@
 package com.changgou.order.controller;
 
+import com.changgou.entity.Result;
 import com.changgou.order.pojo.ReturnCause;
 import com.changgou.order.service.ReturnCauseService;
 import com.github.pagehelper.PageInfo;
-import entity.Result;
-import entity.StatusCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,4 +1,4 @@
-package entity;
+package com.changgou.entity;
 
 /**
  * 返回状态码实体类

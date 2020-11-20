@@ -1,20 +1,15 @@
 package com.changgou.user.controller;
 
+import com.changgou.entity.Result;
+import com.changgou.entity.StatusCode;
 import com.changgou.user.pojo.Provinces;
 import com.changgou.user.service.ProvincesService;
 import com.github.pagehelper.PageInfo;
-import entity.Result;
-import entity.StatusCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/****
- * @Author:shenkunlin
- * @Description:
- * @Date 2019/6/14 0:18
- *****/
 
 @RestController
 @RequestMapping("/provinces")
@@ -35,7 +30,7 @@ public class ProvincesController {
     public Result<PageInfo> findPage(@RequestBody(required = false)  Provinces provinces, @PathVariable  int page, @PathVariable  int size){
         //调用ProvincesService实现分页条件查询Provinces
         PageInfo<Provinces> pageInfo = provincesService.findPage(provinces, page, size);
-        return new Result(true,StatusCode.OK,"查询成功",pageInfo);
+        return new Result(true, StatusCode.OK,"查询成功",pageInfo);
     }
 
     /***

@@ -1,43 +1,40 @@
 package com.changgou.user.controller;
 
+import com.changgou.entity.Result;
+import com.changgou.entity.StatusCode;
+import com.changgou.entity.TokenDecode;
 import com.changgou.user.pojo.Address;
 import com.changgou.user.service.AddressService;
 import com.github.pagehelper.PageInfo;
-import entity.Result;
-import entity.StatusCode;
-import entity.TokenDecode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.List;
 
-/****
- * @Author:shenkunlin
- * @Description:
- * @Date 2019/6/14 0:18
- *****/
 
 @RestController
 @RequestMapping("/address")
 @CrossOrigin
 public class AddressController {
 
-    @Autowired
+    @Resource
     private AddressService addressService;
 
-    @Autowired
+    @Resource
     private TokenDecode tokenDecode;
 
 
     /**
      * 根据姓名查询当前登录用户的收货地址信息
+     *
      * @return
      */
     @GetMapping("/user/list")
-    public Result<List<Address>> list(){
+    public Result<List<Address>> list() {
         String username = tokenDecode.getUserInfo().get("username");
         List<Address> list = addressService.list(username);
-        return new Result<>(true,StatusCode.OK,"查询用户收货地址信息成功",list);
+        return new Result<>(true, StatusCode.OK, "查询用户收货地址信息成功", list);
     }
 
     /***
@@ -47,11 +44,11 @@ public class AddressController {
      * @param size
      * @return
      */
-    @PostMapping(value = "/search/{page}/{size}" )
-    public Result<PageInfo> findPage(@RequestBody(required = false)  Address address, @PathVariable  int page, @PathVariable  int size){
+    @PostMapping(value = "/search/{page}/{size}")
+    public Result<PageInfo> findPage(@RequestBody(required = false) Address address, @PathVariable int page, @PathVariable int size) {
         //调用AddressService实现分页条件查询Address
         PageInfo<Address> pageInfo = addressService.findPage(address, page, size);
-        return new Result(true,StatusCode.OK,"查询成功",pageInfo);
+        return new Result(true, StatusCode.OK, "查询成功", pageInfo);
     }
 
     /***
@@ -60,11 +57,11 @@ public class AddressController {
      * @param size:每页显示多少条
      * @return
      */
-    @GetMapping(value = "/search/{page}/{size}" )
-    public Result<PageInfo> findPage(@PathVariable  int page, @PathVariable  int size){
+    @GetMapping(value = "/search/{page}/{size}")
+    public Result<PageInfo> findPage(@PathVariable int page, @PathVariable int size) {
         //调用AddressService实现分页查询Address
         PageInfo<Address> pageInfo = addressService.findPage(page, size);
-        return new Result<PageInfo>(true,StatusCode.OK,"查询成功",pageInfo);
+        return new Result<PageInfo>(true, StatusCode.OK, "查询成功", pageInfo);
     }
 
     /***
@@ -72,11 +69,11 @@ public class AddressController {
      * @param address
      * @return
      */
-    @PostMapping(value = "/search" )
-    public Result<List<Address>> findList(@RequestBody(required = false)  Address address){
+    @PostMapping(value = "/search")
+    public Result<List<Address>> findList(@RequestBody(required = false) Address address) {
         //调用AddressService实现条件查询Address
         List<Address> list = addressService.findList(address);
-        return new Result<List<Address>>(true,StatusCode.OK,"查询成功",list);
+        return new Result<List<Address>>(true, StatusCode.OK, "查询成功", list);
     }
 
     /***
@@ -84,11 +81,11 @@ public class AddressController {
      * @param id
      * @return
      */
-    @DeleteMapping(value = "/{id}" )
-    public Result delete(@PathVariable Integer id){
+    @DeleteMapping(value = "/{id}")
+    public Result delete(@PathVariable Integer id) {
         //调用AddressService实现根据主键删除
         addressService.delete(id);
-        return new Result(true,StatusCode.OK,"删除成功");
+        return new Result(true, StatusCode.OK, "删除成功");
     }
 
     /***
@@ -97,13 +94,13 @@ public class AddressController {
      * @param id
      * @return
      */
-    @PutMapping(value="/{id}")
-    public Result update(@RequestBody  Address address,@PathVariable Integer id){
+    @PutMapping(value = "/{id}")
+    public Result update(@RequestBody Address address, @PathVariable Integer id) {
         //设置主键值
         address.setId(id);
         //调用AddressService实现修改Address
         addressService.update(address);
-        return new Result(true,StatusCode.OK,"修改成功");
+        return new Result(true, StatusCode.OK, "修改成功");
     }
 
     /***
@@ -112,10 +109,10 @@ public class AddressController {
      * @return
      */
     @PostMapping
-    public Result add(@RequestBody   Address address){
+    public Result add(@RequestBody Address address) {
         //调用AddressService实现添加Address
         addressService.add(address);
-        return new Result(true,StatusCode.OK,"添加成功");
+        return new Result(true, StatusCode.OK, "添加成功");
     }
 
     /***
@@ -124,10 +121,10 @@ public class AddressController {
      * @return
      */
     @GetMapping("/{id}")
-    public Result<Address> findById(@PathVariable Integer id){
+    public Result<Address> findById(@PathVariable Integer id) {
         //调用AddressService实现根据主键查询Address
         Address address = addressService.findById(id);
-        return new Result<Address>(true,StatusCode.OK,"查询成功",address);
+        return new Result<Address>(true, StatusCode.OK, "查询成功", address);
     }
 
     /***
@@ -135,9 +132,9 @@ public class AddressController {
      * @return
      */
     @GetMapping
-    public Result<List<Address>> findAll(){
+    public Result<List<Address>> findAll() {
         //调用AddressService实现查询所有Address
         List<Address> list = addressService.findAll();
-        return new Result<List<Address>>(true, StatusCode.OK,"查询成功",list) ;
+        return new Result<List<Address>>(true, StatusCode.OK, "查询成功", list);
     }
 }

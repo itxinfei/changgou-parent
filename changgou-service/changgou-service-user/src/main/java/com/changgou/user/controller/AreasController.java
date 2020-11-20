@@ -1,20 +1,14 @@
 package com.changgou.user.controller;
 
+import com.changgou.entity.Result;
+import com.changgou.entity.StatusCode;
 import com.changgou.user.pojo.Areas;
 import com.changgou.user.service.AreasService;
 import com.github.pagehelper.PageInfo;
-import entity.Result;
-import entity.StatusCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
-/****
- * @Author:shenkunlin
- * @Description:
- * @Date 2019/6/14 0:18
- *****/
 
 @RestController
 @RequestMapping("/areas")
@@ -35,7 +29,7 @@ public class AreasController {
     public Result<PageInfo> findPage(@RequestBody(required = false)  Areas areas, @PathVariable  int page, @PathVariable  int size){
         //调用AreasService实现分页条件查询Areas
         PageInfo<Areas> pageInfo = areasService.findPage(areas, page, size);
-        return new Result(true,StatusCode.OK,"查询成功",pageInfo);
+        return new Result(true, StatusCode.OK,"查询成功",pageInfo);
     }
 
     /***

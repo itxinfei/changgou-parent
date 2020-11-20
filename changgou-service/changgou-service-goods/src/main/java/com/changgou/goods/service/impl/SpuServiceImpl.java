@@ -1,6 +1,7 @@
 package com.changgou.goods.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.changgou.entity.IdWorker;
 import com.changgou.goods.dao.BrandMapper;
 import com.changgou.goods.dao.CategoryMapper;
 import com.changgou.goods.dao.SkuMapper;
@@ -9,7 +10,6 @@ import com.changgou.goods.pojo.*;
 import com.changgou.goods.service.SpuService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import entity.IdWorker;
 import org.springframework.amqp.rabbit.core.RabbitMessagingTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

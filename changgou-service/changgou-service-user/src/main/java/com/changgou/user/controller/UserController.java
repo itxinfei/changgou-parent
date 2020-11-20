@@ -1,10 +1,13 @@
 package com.changgou.user.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.changgou.entity.BCrypt;
+import com.changgou.entity.JwtUtil;
+import com.changgou.entity.Result;
+import com.changgou.entity.StatusCode;
 import com.changgou.user.pojo.User;
 import com.changgou.user.service.UserService;
 import com.github.pagehelper.PageInfo;
-import entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -40,7 +43,7 @@ public class UserController {
     @GetMapping(value = "/points/{points}/{username}")
     public Result addPoints(@PathVariable(value = "points") Integer points, @PathVariable(value = "username") String username){
         userService.updatePoints(points,username);
-        return new Result(true,StatusCode.OK,"增加积分成功");
+        return new Result(true, StatusCode.OK,"增加积分成功");
     }
 
 

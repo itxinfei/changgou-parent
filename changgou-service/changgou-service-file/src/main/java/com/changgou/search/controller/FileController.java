@@ -2,9 +2,6 @@ package com.changgou.search.controller;
 
 import com.changgou.file.FastDFSFile;
 import com.changgou.utils.FastDFSClient;
-import entity.Result;
-import entity.StatusCode;
-import org.apache.commons.io.FilenameUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;

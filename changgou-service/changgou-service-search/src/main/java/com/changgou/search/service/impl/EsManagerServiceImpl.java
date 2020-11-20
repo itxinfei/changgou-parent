@@ -1,12 +1,12 @@
 package com.changgou.search.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.changgou.entity.Result;
 import com.changgou.goods.feign.SkuFeign;
 import com.changgou.goods.pojo.Sku;
 import com.changgou.search.dao.SearchMapper;
 import com.changgou.search.pojo.SkuInfo;
 import com.changgou.search.service.EsManagerService;
-import entity.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.stereotype.Service;
@@ -49,13 +49,13 @@ public class EsManagerServiceImpl implements EsManagerService {
      */
     @Override
     public void importDataToESBySpuId(String spuId) {
-        List<Sku> skuList = (List<Sku>) skuFeign.findById(spuId);
+        /*List<Sku> skuList = (List<Sku>) skuFeign.findById(spuId);
         List<SkuInfo> skuInfos = JSON.parseArray(JSON.toJSONString(skuList), SkuInfo.class);
 
         for (SkuInfo skuInfo : skuInfos) {
             skuInfo.setSpecMap(JSON.parseObject(skuInfo.getSpec(), Map.class));
         }
-        searchMapper.saveAll(skuInfos);
+        searchMapper.saveAll(skuInfos);*/
     }
 
     /**
@@ -65,12 +65,12 @@ public class EsManagerServiceImpl implements EsManagerService {
     public void importAll() {
         Map paramMap = new HashMap();
         Object put = paramMap.put("status", "1");
-        Result result = skuFeign.findList((Sku) put);
+        /*Result result = skuFeign.findList((Sku) put);
         List<SkuInfo> skuInfos = JSON.parseArray(JSON.toJSONString(result.getData()), SkuInfo.class);
         for (SkuInfo skuInfo : skuInfos) {
             skuInfo.setPrice(skuInfo.getPrice());
             skuInfo.setSpecMap(JSON.parseObject(skuInfo.getSpec(), Map.class));
         }
-        searchMapper.saveAll(skuInfos);
+        searchMapper.saveAll(skuInfos);*/
     }
 }

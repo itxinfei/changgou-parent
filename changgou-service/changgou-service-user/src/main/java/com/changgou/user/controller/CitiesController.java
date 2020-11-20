@@ -1,10 +1,10 @@
 package com.changgou.user.controller;
 
+import com.changgou.entity.Result;
+import com.changgou.entity.StatusCode;
 import com.changgou.user.pojo.Cities;
 import com.changgou.user.service.CitiesService;
 import com.github.pagehelper.PageInfo;
-import entity.Result;
-import entity.StatusCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,7 +35,7 @@ public class CitiesController {
     public Result<PageInfo> findPage(@RequestBody(required = false)  Cities cities, @PathVariable  int page, @PathVariable  int size){
         //调用CitiesService实现分页条件查询Cities
         PageInfo<Cities> pageInfo = citiesService.findPage(cities, page, size);
-        return new Result(true,StatusCode.OK,"查询成功",pageInfo);
+        return new Result(true, StatusCode.OK,"查询成功",pageInfo);
     }
 
     /***

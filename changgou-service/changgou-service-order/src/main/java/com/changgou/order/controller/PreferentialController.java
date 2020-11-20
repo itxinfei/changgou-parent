@@ -1,10 +1,10 @@
 package com.changgou.order.controller;
 
+import com.changgou.entity.Result;
+import com.changgou.entity.StatusCode;
 import com.changgou.order.pojo.Preferential;
 import com.changgou.order.service.PreferentialService;
 import com.github.pagehelper.PageInfo;
-import entity.Result;
-import entity.StatusCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,7 +35,7 @@ public class PreferentialController {
     public Result<PageInfo> findPage(@RequestBody(required = false)  Preferential preferential, @PathVariable  int page, @PathVariable  int size){
         //调用PreferentialService实现分页条件查询Preferential
         PageInfo<Preferential> pageInfo = preferentialService.findPage(preferential, page, size);
-        return new Result(true,StatusCode.OK,"查询成功",pageInfo);
+        return new Result(true, StatusCode.OK,"查询成功",pageInfo);
     }
 
     /***

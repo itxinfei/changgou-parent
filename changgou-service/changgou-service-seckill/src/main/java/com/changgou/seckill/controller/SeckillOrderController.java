@@ -1,12 +1,12 @@
 package com.changgou.seckill.controller;
 
+import com.changgou.entity.Result;
+import com.changgou.entity.StatusCode;
+import com.changgou.entity.TokenDecode;
 import com.changgou.seckill.pojo.SeckillOrder;
 import com.changgou.seckill.pojo.SeckillStatus;
 import com.changgou.seckill.service.SeckillOrderService;
 import com.github.pagehelper.PageInfo;
-import entity.Result;
-import entity.StatusCode;
-import entity.TokenDecode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

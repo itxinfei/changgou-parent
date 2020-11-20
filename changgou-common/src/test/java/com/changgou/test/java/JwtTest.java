@@ -1,6 +1,6 @@
 package com.changgou.test.java;
 
-import entity.IdWorker;
+import com.changgou.entity.IdWorker;
 import io.jsonwebtoken.*;
 import org.junit.Test;
 

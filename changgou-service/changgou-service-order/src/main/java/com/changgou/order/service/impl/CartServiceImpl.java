@@ -1,4 +1,5 @@
 package com.changgou.order.service.impl;
+
 import com.changgou.goods.feign.SkuFeign;
 import com.changgou.goods.feign.SpuFeign;
 import com.changgou.goods.pojo.Sku;
@@ -11,6 +12,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 /**
@@ -33,27 +35,28 @@ public class CartServiceImpl implements CartService {
 
     /**
      * 添加购物车 商品加入购物车
+     *
      * @param skuId
      * @param num
      */
     @Override
-    public void add(Long skuId, Integer num,String username) {
-        if (num <= 0){
-            redisTemplate.boundHashOps("cart_"+username).delete(skuId);
+    public void add(Long skuId, Integer num, String username) {
+        if (num <= 0) {
+            redisTemplate.boundHashOps("cart_" + username).delete(skuId);
             return;
         }
 
-    // 获得商品库存信息
-        Result<Sku> skuResult = skuFeign.findById(skuId);
-        if (skuResult != null && skuResult.getData() != null){
+        // 获得商品库存信息
+        Result<Sku> skuResult = skuFeign.findById(skuId.toString());
+        if (skuResult != null && skuResult.getData() != null) {
             //获取sku
             Sku sku = skuResult.getData();
             // 获得spu数据
             Spu spu = spuFeign.findById(sku.getSpuId()).getData();
             // 将商品存放到购物车
-            OrderItem orderItem = goodsToOrderItem(sku,spu,num);
+            OrderItem orderItem = goodsToOrderItem(sku, spu, num);
             // 将商品存到redis中
-            redisTemplate.boundHashOps("cart_" + username).put(skuId,orderItem);
+            redisTemplate.boundHashOps("cart_" + username).put(skuId, orderItem);
             //redisTemplate.opsForHash().get("cart_ "+ username,skuId);
         }
     }
@@ -61,6 +64,7 @@ public class CartServiceImpl implements CartService {
 
     /**
      * 获得购物车的数据回显
+     *
      * @param
      * @return
      */
@@ -72,16 +76,18 @@ public class CartServiceImpl implements CartService {
 
     /**
      * 删除购物车商品
+     *
      * @param skuId
      */
     @Override
-    public void delete(Long skuId,String username) {
+    public void delete(Long skuId, String username) {
         redisTemplate.boundHashOps("cart_" + username).delete(skuId);
     }
 
 
     /**
      * 将商品信息封装OrderItem对象
+     *
      * @param sku
      * @param spu
      * @param num

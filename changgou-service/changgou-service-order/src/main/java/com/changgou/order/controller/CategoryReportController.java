@@ -1,10 +1,10 @@
 package com.changgou.order.controller;
 
+import com.changgou.entity.Result;
+import com.changgou.entity.StatusCode;
 import com.changgou.order.pojo.CategoryReport;
 import com.changgou.order.service.CategoryReportService;
 import com.github.pagehelper.PageInfo;
-import entity.Result;
-import entity.StatusCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,7 +36,7 @@ public class CategoryReportController {
     public Result<PageInfo> findPage(@RequestBody(required = false)  CategoryReport categoryReport, @PathVariable  int page, @PathVariable  int size){
         //调用CategoryReportService实现分页条件查询CategoryReport
         PageInfo<CategoryReport> pageInfo = categoryReportService.findPage(categoryReport, page, size);
-        return new Result(true,StatusCode.OK,"查询成功",pageInfo);
+        return new Result(true, StatusCode.OK,"查询成功",pageInfo);
     }
 
     /***

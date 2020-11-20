@@ -1,4 +1,4 @@
-package entity;
+package com.changgou.entity;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

@@ -16,7 +16,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
-
         <!--canal依赖-->
         <dependency>
             <groupId>com.xpand</groupId>

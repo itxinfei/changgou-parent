@@ -1,22 +1,16 @@
 package com.changgou.goods.controller;
 
+import com.changgou.entity.Result;
+import com.changgou.entity.StatusCode;
 import com.changgou.goods.pojo.Category;
-import com.changgou.goods.pojo.Goods;
 import com.changgou.goods.service.CategoryService;
 import com.github.pagehelper.PageInfo;
-import entity.Result;
-import entity.StatusCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
 
-/****
- * @Author:传智播客
- * @Description:
- * @Date 2019/6/14 0:18
- *****/
 
 @RestController
 @RequestMapping("/category")
@@ -29,26 +23,28 @@ public class CategoryController {
 
     /**
      * 一次请求获得回显数据成功
+     *
      * @param categoryId
      * @return
      */
     @GetMapping("/map/{categoryId}")
-    public Result<Map<String,Object>> getObjectAll(
-            @PathVariable(value = "categoryId")Integer categoryId){
+    public Result<Map<String, Object>> getObjectAll(
+            @PathVariable(value = "categoryId") Integer categoryId) {
         Map<String, Object> listmap = categoryService.getObjectAll(categoryId);
-        return new Result<Map<String, Object>>(true,StatusCode.OK,"获得回显数据成功",listmap);
+        return new Result<Map<String, Object>>(true, StatusCode.OK, "获得回显数据成功", listmap);
     }
 
 
     /**
      * 获得商品分类
+     *
      * @param id
      * @return
      */
     @GetMapping("/list/{id}")
-    public Result<Category> findByParentId(@PathVariable(value = "id")Integer id){
+    public Result<Category> findByParentId(@PathVariable(value = "id") Integer id) {
         List<Category> categories = categoryService.findByParentId(id);
-        return new Result<Category>(true,StatusCode.OK,"查询成功",categories);
+        return new Result<Category>(true, StatusCode.OK, "查询成功", categories);
     }
 
 
@@ -59,11 +55,11 @@ public class CategoryController {
      * @param size
      * @return
      */
-    @PostMapping(value = "/search/{page}/{size}" )
-    public Result<PageInfo> findPage(@RequestBody(required = false)  Category category, @PathVariable  int page, @PathVariable  int size){
+    @PostMapping(value = "/search/{page}/{size}")
+    public Result<PageInfo> findPage(@RequestBody(required = false) Category category, @PathVariable int page, @PathVariable int size) {
         //调用CategoryService实现分页条件查询Category
         PageInfo<Category> pageInfo = categoryService.findPage(category, page, size);
-        return new Result(true,StatusCode.OK,"查询成功",pageInfo);
+        return new Result(true, StatusCode.OK, "查询成功", pageInfo);
     }
 
     /***
@@ -72,11 +68,11 @@ public class CategoryController {
      * @param size:每页显示多少条
      * @return
      */
-    @GetMapping(value = "/search/{page}/{size}" )
-    public Result<PageInfo> findPage(@PathVariable  int page, @PathVariable  int size){
+    @GetMapping(value = "/search/{page}/{size}")
+    public Result<PageInfo> findPage(@PathVariable int page, @PathVariable int size) {
         //调用CategoryService实现分页查询Category
         PageInfo<Category> pageInfo = categoryService.findPage(page, size);
-        return new Result<PageInfo>(true,StatusCode.OK,"查询成功",pageInfo);
+        return new Result<PageInfo>(true, StatusCode.OK, "查询成功", pageInfo);
     }
 
     /***
@@ -84,11 +80,11 @@ public class CategoryController {
      * @param category
      * @return
      */
-    @PostMapping(value = "/search" )
-    public Result<List<Category>> findList(@RequestBody(required = false)  Category category){
+    @PostMapping(value = "/search")
+    public Result<List<Category>> findList(@RequestBody(required = false) Category category) {
         //调用CategoryService实现条件查询Category
         List<Category> list = categoryService.findList(category);
-        return new Result<List<Category>>(true,StatusCode.OK,"查询成功",list);
+        return new Result<List<Category>>(true, StatusCode.OK, "查询成功", list);
     }
 
     /***
@@ -96,11 +92,11 @@ public class CategoryController {
      * @param id
      * @return
      */
-    @DeleteMapping(value = "/{id}" )
-    public Result delete(@PathVariable Integer id){
+    @DeleteMapping(value = "/{id}")
+    public Result delete(@PathVariable Integer id) {
         //调用CategoryService实现根据主键删除
         categoryService.delete(id);
-        return new Result(true,StatusCode.OK,"删除成功");
+        return new Result(true, StatusCode.OK, "删除成功");
     }
 
     /***
@@ -109,13 +105,13 @@ public class CategoryController {
      * @param id
      * @return
      */
-    @PutMapping(value="/{id}")
-    public Result update(@RequestBody  Category category,@PathVariable Integer id){
+    @PutMapping(value = "/{id}")
+    public Result update(@RequestBody Category category, @PathVariable Integer id) {
         //设置主键值
         category.setId(id);
         //调用CategoryService实现修改Category
         categoryService.update(category);
-        return new Result(true,StatusCode.OK,"修改成功");
+        return new Result(true, StatusCode.OK, "修改成功");
     }
 
     /***
@@ -124,10 +120,10 @@ public class CategoryController {
      * @return
      */
     @PostMapping
-    public Result add(@RequestBody   Category category){
+    public Result add(@RequestBody Category category) {
         //调用CategoryService实现添加Category
         categoryService.add(category);
-        return new Result(true,StatusCode.OK,"添加成功");
+        return new Result(true, StatusCode.OK, "添加成功");
     }
 
     /***
@@ -136,10 +132,10 @@ public class CategoryController {
      * @return
      */
     @GetMapping("/{id}")
-    public Result<Category> findById(@PathVariable Integer id){
+    public Result<Category> findById(@PathVariable Integer id) {
         //调用CategoryService实现根据主键查询Category
         Category category = categoryService.findById(id);
-        return new Result<Category>(true,StatusCode.OK,"查询成功",category);
+        return new Result<Category>(true, StatusCode.OK, "查询成功", category);
     }
 
     /***
@@ -147,9 +143,9 @@ public class CategoryController {
      * @return
      */
     @GetMapping
-    public Result<List<Category>> findAll(){
+    public Result<List<Category>> findAll() {
         //调用CategoryService实现查询所有Category
         List<Category> list = categoryService.findAll();
-        return new Result<List<Category>>(true, StatusCode.OK,"查询成功",list) ;
+        return new Result<List<Category>>(true, StatusCode.OK, "查询成功", list);
     }
 }

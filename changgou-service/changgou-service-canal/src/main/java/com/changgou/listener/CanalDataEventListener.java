@@ -6,9 +6,9 @@ import com.changgou.canal.mq.queue.TopicQueue;
 import com.changgou.canal.mq.send.TopicMessageSender;
 import com.changgou.content.feign.ContentFeign;
 import com.changgou.content.pojo.Content;
+import com.changgou.entity.Message;
+import com.changgou.entity.Result;
 import com.xpand.starter.canal.annotation.*;
-import entity.Message;
-import entity.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 
@@ -52,9 +52,9 @@ public class CanalDataEventListener {
         // 获取广告更新后的数据
         String category_id = getColumn(rowData, "category_id");
         // 通过id获得广告数据(调用changgou-service-content服务通过feign调用)
-        Result<List<Content>> result = contentFeign.list(Long.parseLong(category_id));
+        //Result<List<Content>> result = contentFeign.list(Long.parseLong(category_id));
         // 将数据写人redis中
-        redisTemplate.boundValueOps("content" + category_id).set(JSON.toJSONString(result.getData()));
+        //redisTemplate.boundValueOps("content" + category_id).set(JSON.toJSONString(result.getData()));
     }
 
 
@@ -74,7 +74,7 @@ public class CanalDataEventListener {
         //封装Message
         Message message = new Message(number, id, TopicQueue.TOPIC_QUEUE_SPU, TopicQueue.TOPIC_EXCHANGE_SPU);
         //发送消息
-        topicMessageSender.sendMessage(message);
+        //topicMessageSender.sendMessage(message);
     }
 
 

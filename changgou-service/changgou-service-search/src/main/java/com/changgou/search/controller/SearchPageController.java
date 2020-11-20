@@ -50,13 +50,12 @@ public class SearchPageController {
         //执行查询返回值
         Map<String, Object> resultMap = searchService.search(searchMap);
 
-
         model.addAttribute("searchMap", searchMap);
         model.addAttribute("result", resultMap);
-        Page<SkuInfo> page = new Page<SkuInfo>(
+       /* Page<SkuInfo> page = new Page<SkuInfo>(
                 Long.parseLong(resultMap.get("total").toString()),
                 Integer.parseInt(resultMap.get("pageNum").toString()), null);
-        model.addAttribute("page", page);
+        model.addAttribute("page", page);*/
 
         StringBuilder url = new StringBuilder();
 

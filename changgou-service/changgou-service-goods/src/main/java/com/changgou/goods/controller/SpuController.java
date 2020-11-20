@@ -1,22 +1,15 @@
 package com.changgou.goods.controller;
 
+import com.changgou.entity.Result;
+import com.changgou.entity.StatusCode;
 import com.changgou.goods.pojo.Goods;
 import com.changgou.goods.pojo.Spu;
 import com.changgou.goods.service.SpuService;
 import com.github.pagehelper.PageInfo;
-import com.sun.javafx.collections.MappingChange;
-import entity.Result;
-import entity.StatusCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
-/****
- * @Author:传智播客
- * @Description:
- * @Date 2019/6/14 0:18
- *****/
 
 @RestController
 @RequestMapping("/spu")
@@ -38,7 +31,7 @@ public class SpuController {
                                        @PathVariable(value = "size") Integer size,
                                        @RequestBody Spu spu){
          PageInfo<Spu> pageInfo = spuService.findPage(spu, page, size);
-         return new Result<>(true,StatusCode.OK,"分页加条件查询商品列表成功",pageInfo);
+         return new Result<>(true, StatusCode.OK,"分页加条件查询商品列表成功",pageInfo);
      }
 
     /**

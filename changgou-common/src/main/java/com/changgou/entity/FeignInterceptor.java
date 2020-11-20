@@ -1,4 +1,4 @@
-package entity;
+package com.changgou.entity;
 
 import feign.RequestInterceptor;
 import feign.RequestTemplate;

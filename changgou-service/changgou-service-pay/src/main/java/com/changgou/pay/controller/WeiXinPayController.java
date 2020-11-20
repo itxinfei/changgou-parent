@@ -1,10 +1,10 @@
 package com.changgou.pay.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.changgou.entity.Result;
+import com.changgou.entity.StatusCode;
 import com.changgou.pay.service.WeiXinPayService;
 import com.github.wxpay.sdk.WXPayUtil;
-import entity.Result;
-import entity.StatusCode;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -39,7 +39,7 @@ public class WeiXinPayController {
     @GetMapping("/closePay/{orderId}")
     public Result closePay(@PathVariable("orderId") Long orderId){
         Map<String, String> map = weiXinPayService.closePay(orderId);
-        return new Result(true,StatusCode.OK,"关闭微信支付成功",map);
+        return new Result(true, StatusCode.OK,"关闭微信支付成功",map);
     }
 
 

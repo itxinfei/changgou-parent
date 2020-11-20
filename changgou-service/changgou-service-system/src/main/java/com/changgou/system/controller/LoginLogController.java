@@ -1,11 +1,11 @@
 package com.changgou.system.controller;
 
+import com.changgou.entity.PageResult;
+import com.changgou.entity.StatusCode;
+import com.changgou.entity.Result;
 import com.changgou.system.pojo.LoginLog;
 import com.changgou.system.service.LoginLogService;
 import com.github.pagehelper.Page;
-import entity.PageResult;
-import entity.Result;
-import entity.StatusCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

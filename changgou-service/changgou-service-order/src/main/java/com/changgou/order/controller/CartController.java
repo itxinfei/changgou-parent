@@ -1,10 +1,10 @@
 package com.changgou.order.controller;
 
+import com.changgou.entity.Result;
+import com.changgou.entity.StatusCode;
+import com.changgou.entity.TokenDecode;
 import com.changgou.order.pojo.OrderItem;
 import com.changgou.order.service.CartService;
-import entity.Result;
-import entity.StatusCode;
-import entity.TokenDecode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,7 +35,7 @@ public class CartController {
     public Result delete(@PathVariable(value = "skuId") Long skuId){
         String username = tokenDecode.getUserInfo().get("username");
         cartService.delete(skuId,username);
-        return new Result(true,StatusCode.OK,"删除商品成功！！");
+        return new Result(true, StatusCode.OK,"删除商品成功！！");
     }
 
 

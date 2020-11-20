@@ -1,11 +1,11 @@
 package com.changgou.seckill.controller;
 
+import com.changgou.entity.DateUtil;
+import com.changgou.entity.Result;
+import com.changgou.entity.StatusCode;
 import com.changgou.seckill.pojo.SeckillGoods;
 import com.changgou.seckill.service.SeckillGoodsService;
 import com.github.pagehelper.PageInfo;
-import entity.DateUtil;
-import entity.Result;
-import entity.StatusCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,7 +36,7 @@ public class SeckillGoodsController {
     @RequestMapping("/one")
     public Result one(String time, Long seckillId){
         SeckillGoods seckillGoods = seckillGoodsService.one(time, seckillId);
-        return new Result(true,StatusCode.OK,"查询抢购商品详细成功",seckillGoods);
+        return new Result(true, StatusCode.OK,"查询抢购商品详细成功",seckillGoods);
     }
 
     /**
