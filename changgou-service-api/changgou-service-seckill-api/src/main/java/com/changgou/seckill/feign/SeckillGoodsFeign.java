@@ -1,14 +1,20 @@
 package com.changgou.seckill.feign;
+
+import com.changgou.entity.Result;
+import com.changgou.seckill.pojo.SeckillGoods;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-/****
- * @Author:shenkunlin
- * @Description:
- * @Date 2019/6/18 13:58
- *****/
-@FeignClient(name="seckill")
+import java.util.List;
+
+/**
+ *
+ */
+@FeignClient(name = "seckill")
 @RequestMapping("/seckillGoods")
 public interface SeckillGoodsFeign {
-
+    //
+    @RequestMapping("/seckillgoods/list")
+    Result<List<SeckillGoods>> list(@RequestParam("time") String time);
 }

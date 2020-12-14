@@ -1,6 +1,6 @@
 package com.changgou.seckill.web;
 
-import entity.FeignInterceptor;
+import com.changgou.entity.FeignInterceptor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
@@ -17,16 +17,17 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 public class SecKillWebApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SecKillWebApplication.class,args);
+        SpringApplication.run(SecKillWebApplication.class, args);
     }
 
     @Bean
-    public FeignInterceptor feignInterceptor(){
-        return  new FeignInterceptor();
+    public FeignInterceptor feignInterceptor() {
+        return new FeignInterceptor();
     }
 
     /**
      * 设置 redisTemplate 的序列化设置
+     *
      * @param redisConnectionFactory
      * @return
      */

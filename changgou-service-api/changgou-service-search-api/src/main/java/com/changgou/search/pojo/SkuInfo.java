@@ -9,11 +9,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Map;
 
-/**
- * @Author: Ye Jian Song
- * @Description: 与Es文档中的数据完成映射
- * @Date: Create in 19:49 2019/8/17
- */
 @Document(indexName = "skuinfo", type = "docs")
 public class SkuInfo implements Serializable {
 

@@ -1,10 +1,9 @@
 package com.changgou.seckill.web.controller;
 
+import com.changgou.entity.DateUtil;
 import com.changgou.entity.Result;
-import com.changgou.seckill.feign.SecKillGoodsFeign;
 import com.changgou.seckill.pojo.SeckillGoods;
-import com.changgou.util.DateUtil;
-import entity.Result;
+import com.changgou.seckill.feign.SecKillGoodsFeign;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,9 +41,7 @@ public class SecKillGoodsController {
             String format = simpleDateFormat.format(dateMenu);
             result.add(format);
         }
-
         return result;
-
     }
 
     @RequestMapping("/list")

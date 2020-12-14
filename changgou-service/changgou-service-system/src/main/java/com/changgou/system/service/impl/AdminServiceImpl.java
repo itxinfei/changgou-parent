@@ -1,11 +1,11 @@
 package com.changgou.system.service.impl;
 
+import com.changgou.entity.BCrypt;
 import com.changgou.system.dao.AdminMapper;
 import com.changgou.system.pojo.Admin;
 import com.changgou.system.service.AdminService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import entity.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;

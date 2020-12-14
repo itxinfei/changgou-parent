@@ -10,8 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class SecKillOrderController {
 
     @RequestMapping("/add")
-    public Result add(@RequestParam("time") String time, @RequestParam("id")Long id){
-
+    public Result add(@RequestParam("time") String time, @RequestParam("id") Long id) {
         return null;
     }
 }
