@@ -1,5 +1,5 @@
 package com.changgou.order;
-import entity.TokenDecode;
+import com.changgou.entity.TokenDecode;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,11 +9,6 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.test.context.junit4.SpringRunner;
 
-/**
- * @Author: Ye Jian Song
- * @Description:
- * @Date: Create in 22:41 2019/8/24
- */
 @SpringBootTest
 @RunWith(SpringRunner.class)
 public class OrderTest {

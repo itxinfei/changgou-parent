@@ -11,8 +11,6 @@
     <artifactId>changgou-service-file</artifactId>
     <description>文件上传工程</description>
 
-
-
     <!--依赖包-->
     <dependencies>
         <dependency>

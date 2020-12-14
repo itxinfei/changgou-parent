@@ -5,7 +5,6 @@ import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
-
 /**
  * @Author: Ye Jian Song
  * @Description: 处理错误消息
@@ -17,9 +16,8 @@ import org.springframework.stereotype.Component;
 //@RabbitListener(queues = "${mq.pay.queue.seckillordertimer}")
 public class OrderPayMessageListener {
 
-
     @RabbitHandler
-    public void readMessage(String text){
+    public void readMessage(String text) {
         System.out.println(text);
     }
 }

@@ -24,7 +24,6 @@ public class AuthorizeFilter implements GlobalFilter, Ordered {
     // 登录页面
     private static final String LOGIN_URL = "http://localhost:9001/oauth/login";
 
-
     /**
      * 指定过滤器的优先级
      *
@@ -87,7 +86,6 @@ public class AuthorizeFilter implements GlobalFilter, Ordered {
         // 解析成功
         return chain.filter(exchange);
     }
-
 
     /**
      * 处理业务

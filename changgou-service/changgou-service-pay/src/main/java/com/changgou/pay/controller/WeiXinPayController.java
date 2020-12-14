@@ -16,10 +16,8 @@ import java.io.ByteArrayOutputStream;
 import java.util.Map;
 
 /**
- * @Author: Ye Jian Song
- * @Description:
- * @Date: Create in 18:04 2019/8/27
- */
+* @Author pangzhao
+*/
 @RestController
 @RequestMapping("/weixin/pay")
 @CrossOrigin

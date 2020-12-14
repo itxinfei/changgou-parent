@@ -22,6 +22,7 @@
         <module>changgou-user-oauth</module>
         <module>changgou-common-fescar</module>
         <module>changgou-task</module>
+        <module>changgou-demo</module>
     </modules>
 
     <!--SringBoot父依赖-->

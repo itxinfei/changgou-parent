@@ -12,10 +12,6 @@ import java.util.Date;
 
 /**
  * @ClassName JwtUtil
- * @Description
- * @Author 
- * @Date 15:04 2019/8/20
- * @Version 2.1
  **/
 public class JwtUtil {
 
@@ -35,8 +31,8 @@ public class JwtUtil {
         Date now = new Date(nowMillis);
 
         //如果令牌有效期为null，则默认设置有效期1小时
-        if(ttlMillis==null){
-            ttlMillis= JwtUtil.JWT_TTL;
+        if (ttlMillis == null) {
+            ttlMillis = JwtUtil.JWT_TTL;
         }
 
         //令牌过期时间设置
@@ -59,6 +55,7 @@ public class JwtUtil {
 
     /**
      * 生成加密 secretKey
+     *
      * @return
      */
     public static SecretKey generalKey() {
@@ -67,9 +64,9 @@ public class JwtUtil {
         return key;
     }
 
-
     /**
      * 解析令牌数据
+     *
      * @param jwt
      * @return
      * @throws Exception

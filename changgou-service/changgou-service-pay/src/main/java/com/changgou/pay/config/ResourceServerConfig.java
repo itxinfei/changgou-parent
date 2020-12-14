@@ -18,12 +18,8 @@ import java.io.InputStreamReader;
 import java.util.stream.Collectors;
 
 /**
- * @ClassName ResourceServerConfig
- * @Description
- * @Author 传智播客
- * @Date 11:57 2019/8/22
- * @Version 2.1
- **/
+* @Author pangzhao
+*/
 @Configuration
 @EnableResourceServer
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)// 激活方法上的PreAuthorize注解

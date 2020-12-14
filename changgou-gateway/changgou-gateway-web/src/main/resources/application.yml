@@ -76,7 +76,6 @@ spring:
             - Path=/api/wseckillgoods/**
           filters:
             - StripPrefix=1
-
   application:
     name: gateway-web
   # Redis配置

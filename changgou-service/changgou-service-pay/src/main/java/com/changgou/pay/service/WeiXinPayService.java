@@ -3,9 +3,8 @@ package com.changgou.pay.service;
 import java.util.Map;
 
 /**
- * @Author: Ye Jian Song
+ * @Author: pangzhao
  * @Description: 微信支付业务接口
- * @Date: Create in 17:27 2019/8/27
  */
 public interface WeiXinPayService {
 

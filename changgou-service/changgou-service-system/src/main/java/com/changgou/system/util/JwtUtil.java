@@ -3,13 +3,16 @@ package com.changgou.system.util;
 /**
  *
  */
+
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import java.util.Base64;
 import java.util.Date;
+
 /**
  * JWT工具类
  */
@@ -32,8 +35,8 @@ public class JwtUtil {
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
         long nowMillis = System.currentTimeMillis();
         Date now = new Date(nowMillis);
-        if(ttlMillis==null){
-            ttlMillis=JwtUtil.JWT_TTL;
+        if (ttlMillis == null) {
+            ttlMillis = JwtUtil.JWT_TTL;
         }
         long expMillis = nowMillis + ttlMillis;
         Date expDate = new Date(expMillis);
