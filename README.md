@@ -1,8 +1,27 @@
-### 畅购商城
+![](Doc/Logo.png)
 
-### 交流方式：
-QQ技术交流群：863662849<a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=9yLlyD1dRBL97xmBKw43zRt0-6xg8ohb&jump_from=webapi">
-<img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="Java项目交流+求职面试" title="Java项目交流+求职面试"></a><a target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=f0hLSE9OTkdHTT8ODlEcEBI" style="text-decoration:none;"><img src="http://rescdn.qqmail.com/zh_CN/htmledition/images/function/qm_open/ico_mailme_02.png"/></a>
+<p align="center">
+  <a href="https://gitee.com/itxinfei">
+    <img alt="code style" src="https://img.shields.io/badge/心飞为你飞-https%3A%2F%2Fgitee.com%2Fitxinfei-green">
+  </a> 
+  <a href="https://qm.qq.com/cgi-bin/qm/qr?k=9yLlyD1dRBL97xmBKw43zRt0-6xg8ohb&jump_from=webapi">
+    <img alt="code style" src="https://img.shields.io/badge/QQ群-863662849-red">
+  </a> 
+  <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=f0hLSE9OTkdHTT8ODlEcEBI">
+    <img alt="code style" src="https://img.shields.io/badge/mail-747011882@qq.com-red">
+  </a> 
+
+  <a href=" ">
+    <img alt="code style" src="https://img.shields.io/badge/JDK-1.8%2B-brightgreen">
+  </a> 
+  <a href=" ">
+    <img alt="maven" src="https://img.shields.io/badge/maven-3.6.3%2B-yellowgreen">
+  </a>
+  <a href=" ">
+    <img alt="code style" src="https://img.shields.io/badge/license-Apache-green">
+  </a> 
+</p>
+
 
 ### 演示前端地址：
 http://www-changgou-java.itheima.net/
