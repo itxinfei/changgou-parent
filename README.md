@@ -1,4 +1,4 @@
-![](Doc/Logo.png)
+![](doc/Logo.png)
 
 <p align="center">
   <a href="https://gitee.com/itxinfei">
@@ -23,11 +23,15 @@
 </p>
 
 
-### 前端地址：
+### 演示地址：
+前端：
 http://www-changgou-java.itheima.net/
 
-### 后端地址：
+后端：
 http://admin-changgou-java.itheima.net/index.html#/login
+
+前端工程：
+https://gitee.com/itxinfei/changgou-front
 
 #### 技术架构
 ![输入图片说明](https://images.gitee.com/uploads/images/2020/0617/165507_e8b47337_800553.png "1-4.png")
